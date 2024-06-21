@@ -14,11 +14,11 @@
         <script type="text/javascript" src="js/webxr.js"></script>
         <script type="text/javascript" src="js/joystick.js"></script>
         <script type="text/javascript" src="js/camera-cube-env.js"></script>
-        
+         <script src="https://unpkg.com/aframe-fps-counter-component@1.0.1/dist/aframe-fps-counter-component.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body onload="init();">
-        <a-scene stats  shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
+        <a-scene stats  shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
             <!-- Assets -->
             <a-assets>
 				<a-asset-item id="MainMesh" src="./assets/MainMesh.gltf"></a-asset-item>
@@ -49,6 +49,14 @@
                             material="color: #CCC; shader: flat;"
                             raycaster = "far: 10.0; interval: 1500.0; objects: .clickable,.links">
                         </a-entity>
+                </a-entity>
+                
+                <a-entity hand-controls="hand: right">
+                
+                    <a-entity fps-counter
+                              position="0 0.2 0"
+                              
+rotation="-30 0 0"></a-entity>
                 </a-entity>
                     
             </a-entity>
