@@ -22,6 +22,8 @@
             stats
             shadow="type: basic; autoUpdate: false;"
             renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
+            <!-- Disable inspector -->
+ <script> var sceneEl = document.querySelector('a-scene'); sceneEl.addEventListener('loaded', function () { sceneEl.removeAttribute('inspector'); }); </script>
             <!-- Assets -->
             <a-assets>
                 <a-asset-item id="MainMesh" src="./assets/MainMesh.gltf"></a-asset-item>
@@ -45,7 +47,7 @@
                 scale="0.2 0.2 0.2"
                 shadow="cast: false"
                 position="-6.58605 1.17233 -15.31422"
-                       animation="property: rotation; to: 0 360 0; dur: 5500; loop: true">
+                animation="property: rotation; to: 0 360 0; dur: 5500; loop: true">
             </a-entity>
 
             <!-- Camera -->
