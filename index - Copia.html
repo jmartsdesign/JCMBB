@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>360º VR - 01 - Sphere</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+
+    </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img
+          id="jardimCMBB"
+          crossorigin="anonymous"
+          src="/Assets/Entrada_CMBB360-01.jpg"
+        />
+      </a-assets>
+
+
+      <a-sky src="#jardimCMBB"></a-sky>
+      
+      <!-- Clickable Link Box 
+      <a-link href="https://www.example.com" title="Entrada" position="0 1 -3" color="#4CC3D9" ></a-link> -->
+      
+      <!-- Small and Transparent Link Box -->
+      <a-link href="/JardimCMBB/index.html" title="Entrada" position="0 0.5 -3" 
+              color="#4CC3D9" 
+              scale="0.5 0.5 0.5" 
+              opacity="0" 
+              text="value: ; color: #00000000;"></a-link>
+
+      <a-camera wasd-controls-enabled="true">
+          <a-cursor></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
