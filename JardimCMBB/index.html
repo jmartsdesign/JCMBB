@@ -23,15 +23,23 @@
             shadow="type: basic; autoUpdate: false;"
             renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
             <!-- Disable inspector -->
- <script> var sceneEl = document.querySelector('a-scene'); sceneEl.addEventListener('loaded', function () { sceneEl.removeAttribute('inspector'); }); </script>
-            <!-- Assets -->
+            <script>
+                var sceneEl = document.querySelector("a-scene");
+                sceneEl.addEventListener("loaded", function () {
+                    sceneEl.removeAttribute("inspector");
+                });
+            </script>
+
+            <!-- Assets ------------------------------------------------->
+
             <a-assets>
                 <a-asset-item id="MainMesh" src="./assets/MainMesh.gltf"></a-asset-item>
                 <a-asset-item id="PalcoEmblema" src="./assets/Cordis_43.glb"></a-asset-item>
                 <img id="sky" src="./resources/sky.jpg" />
             </a-assets>
 
-            <!-- Entities -->
+            <!-- Entities ----------------------------------------------->
+
             <!-- JArdim CMBB -->
             <a-entity
                 id="#MainMesh"
@@ -41,7 +49,7 @@
                 shadow="cast: false"></a-entity>
 
             <!-- Palco e Emblema -->
-            7<a-entity
+            <a-entity
                 id="#PalcoEmblema"
                 gltf-model="#PalcoEmblema"
                 scale="0.2 0.2 0.2"
@@ -50,7 +58,7 @@
                 animation="property: rotation; to: 0 360 0; dur: 5500; loop: true">
             </a-entity>
 
-            <!-- Camera -->
+            <!-- Camera ---------------------------------------------->
             <a-entity id="player" position="0 -0.2 0" movement-controls="speed: 0.10000000149011612;">
                 <a-entity
                     id="camera"
@@ -72,9 +80,11 @@
                 </a-entity>
             </a-entity>
 
-            <!-- Lights -->
+            <!-- Lights 
+            <a-entity position="-5.117312431335449 2.0466675758361816 2.439497947692871" light="castShadow:false; color:#ffffff; distance:40.0; type:point; intensity:1.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"></a-entity>
+---------------------------------------------->
 
-            <!-- Sky -->
+            <!-- Sky ---------------------------------------------->
             <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
         </a-scene>
     </body>
