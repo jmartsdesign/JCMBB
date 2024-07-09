@@ -22,25 +22,39 @@
             stats
             shadow="type: basic; autoUpdate: false;"
             renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
-            <!-- Disable inspector -->
+            <!-- Disable inspector  -->
             <script>
                 var sceneEl = document.querySelector("a-scene");
                 sceneEl.addEventListener("loaded", function () {
                     sceneEl.removeAttribute("inspector");
                 });
-            </script>
+            </script> 
 
             <!-- Assets ------------------------------------------------->
 
             <a-assets>
-                <a-asset-item id="MainMesh" src="./assets/MainMesh.gltf"></a-asset-item>
+                <!--Elementos 3D -->
+                <a-asset-item id="MainMesh" src="./assets/JCMBB3D.glb"></a-asset-item>
                 <a-asset-item id="PalcoEmblema" src="./assets/Cordis_43.glb"></a-asset-item>
+                <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
+                
+                <!-- Sky - Entrada do Jardim -------------------->
                 <img id="sky" src="./resources/sky.jpg" />
+                
+                <!--imagems dos paineis informativo -->
+                <img id="infopanel" crossorign="anonymous" src="/Assets/infopanel-down.png" />
+                <img id="infopanel-anjos" crossorigin="anonymous" src="/Assets/infopanel-anjos.png" />
+                
+                <!--imagem cenários 360 -->
+                <img id="CMBB360" crossorigin="anonymous" src="/Assets/Entrada_CMBB360-01.jpg" />
             </a-assets>
 
             <!-- Entities ----------------------------------------------->
 
-            <!-- JArdim CMBB -->
+            <!-- Base de movimento Limites -->
+            <a-entity id="#BaseMovimento" gltf-model="#BaseMovimento" scale="1 1 1" visible="true"></a-entity>
+
+            <!-- JArdim CMBB 3D -->
             <a-entity
                 id="#MainMesh"
                 gltf-model="#MainMesh"
@@ -48,7 +62,7 @@
                 visible="true"
                 shadow="cast: false"></a-entity>
 
-            <!-- Palco e Emblema -->
+            <!-- Palco e Emblema 3D -->
             <a-entity
                 id="#PalcoEmblema"
                 gltf-model="#PalcoEmblema"
@@ -57,6 +71,18 @@
                 position="-6.58605 1.17233 -15.31422"
                 animation="property: rotation; to: 0 360 0; dur: 5500; loop: true">
             </a-entity>
+
+            <!-- JardimCMBB 360 -->
+            <a-link
+                id="vistaCMBB360"
+                class="clickable"
+                position="0 1 12.5"
+                rotation="0 0 0"
+                link="visualAspectEnabled:true"
+                href="/index.html"
+                title="Ver Casa Museu"
+                ><a-sphere src="#CMBB360"></a-sphere>
+            </a-link>
 
             <!-- Camera ---------------------------------------------->
             <a-entity id="player" position="0 -0.2 0" movement-controls="speed: 0.10000000149011612;">
