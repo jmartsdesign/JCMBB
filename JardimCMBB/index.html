@@ -28,23 +28,23 @@
                 sceneEl.addEventListener("loaded", function () {
                     sceneEl.removeAttribute("inspector");
                 });
-            </script> 
+            </script>
 
             <!-- Assets ------------------------------------------------->
 
             <a-assets>
                 <!--Elementos 3D -->
                 <a-asset-item id="MainMesh" src="./assets/JCMBB3D.glb"></a-asset-item>
-                <a-asset-item id="PalcoEmblema" src="./assets/Cordis_43.glb"></a-asset-item>
+                <a-asset-item id="PalcoEmblema" src="./assets/filename.glb"></a-asset-item>
                 <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
-                
+
                 <!-- Sky - Entrada do Jardim -------------------->
                 <img id="sky" src="./resources/sky.jpg" />
-                
+
                 <!--imagems dos paineis informativo -->
                 <img id="infopanel" crossorign="anonymous" src="/Assets/infopanel-down.png" />
                 <img id="infopanel-anjos" crossorigin="anonymous" src="/Assets/infopanel-anjos.png" />
-                
+
                 <!--imagem cenários 360 -->
                 <img id="CMBB360" crossorigin="anonymous" src="/Assets/Entrada_CMBB360-01.jpg" />
             </a-assets>
@@ -69,8 +69,9 @@
                 scale="0.2 0.2 0.2"
                 shadow="cast: false"
                 position="-6.58605 1.17233 -15.31422"
-                animation="property: rotation; to: 0 360 0; dur: 5500; loop: true">
-            </a-entity>
+                animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
+                animation-mixer="useRegExp: true;  clip: MenStay|DemonStay|WomanStay|HeartBeating"
+></a-entity>
 
             <!-- JardimCMBB 360 -->
             <a-link
