@@ -16,15 +16,18 @@
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
     <script type="text/javascript" src="js/webxr.js"></script>
     <script type="text/javascript" src="js/joystick.js"></script>
-    <script src="https://unpkg.com/aframe-fps-counter-component@1.0.1/dist/aframe-fps-counter-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-fps-counter-component@1.0.1/dist/aframe-fps-counter-component.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body onload="init();">
-    <a-scene stats shadow="type: basic; autoUpdate: false;"
+    <a-scene stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse"
         renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
         <!-- Disable inspector  
             <script>
@@ -34,11 +37,14 @@
                 });
             </script>  -->
 
+        <!-- Salvar o HTML com o A-Inspector (https://github.com/supermedium/aframe-watcher) 
+            <a-scene inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">   -->
+
         <!-- Assets ------------------------------------------------->
 
         <a-assets>
             <!--Elementos 3D -->
-            <a-asset-item id="MainMesh" src="./assets/JCMBB3D.glb"></a-asset-item>
+            <a-asset-item id="JCMBB3D" src="./assets/JCMBB3D.glb"></a-asset-item>
             <a-asset-item id="PalcoEmblema" src="./assets/CenaNE--Anima-V1-2-2.glb"></a-asset-item>
             <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
 
@@ -63,17 +69,17 @@
         <!-- Entities ----------------------------------------------->
 
         <!-- Base de movimento Limites -->
-        <a-entity id="#BaseMovimento" gltf-model="#BaseMovimento" scale="1 1 1" visible="true"></a-entity>
+        <a-entity id="1BaseMovimento" gltf-model="#BaseMovimento" scale="1 1 1" visible="true"></a-entity>
 
         <!-- JArdim CMBB 3D -->
-        <a-entity id="#MainMesh" gltf-model="#MainMesh" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
+        <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
 
         <!-- Palco e Emblema 3D -->
 
         <!-- animation-mixer="useRegExp: true;  clip: DemonStay|WomanStay|HeartBeating" (anima todas as ainmações no ficheiro) -->
-        <a-entity id="#PalcoEmblema" class="clickable" gltf-model="#PalcoEmblema" scale="0.2 0.2 0.2"
-            shadow="cast: false" position="-6.58605 1.17233 -15.31422"
-            animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena2"
+        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" class="clickable" gltf-model="#PalcoEmblema"
+            scale="0.2 0.2 0.2" shadow="cast: false" position="-6.586 1.2 -15.314"
+            animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena1"
             event-set__click_1="_event: click; animation-mixer.clip: Cena1"
             event-set__click_2="_event: click; animation-mixer.clip: Cena2"
             sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
@@ -83,42 +89,44 @@
             href="/index.html" title="Ver Casa Museu"><a-sphere src="#CMBB360"></a-sphere>
         </a-link>
 
-        <!-- JardimCMBB PAINEIS -->
-        <a-plane position="-12.3 1.6 1.75" rotation="0 90 0" visible="true" width="1.5" height="1.5" color="red"
-            event-set__makevisible="_event: mouseenter; _target: #infopanel1; visible: true"
-            event-set__makebig="_event: mouseenter; width: 1"
-            event-set__makeinvisible="_event: mouseleave; _target: #infopanel1; visible: false"
-            event-set__makesmall="_event: mouseleave; width: 0.5"></a-plane>
-
+        <!-- JardimCMBB PAINEIS ------->
+        <!-- Painel 01 -->
+        <a-box width="2" height="2" depth="1.5" position="-11.84733 1.6 1.75" color="red"
+            aabb-collider="objects: #cabeca; debug:true;" visible="false"
+            event-set__coliliderstart="_event: hitstart; _target:#infopanel1; visible:true"
+            event-set__coliliderend="_event: hitend; _target:#infopanel1; visible:false"
+            proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"></a-box>
         <a-entity id="infopanel1" class="infopanel" position="-13 1.6 1.75" look-at="camera" visible="false"
             rotation="0 90 0">
-            <a-image src="#PainelCordis-1" height="1" width="1"></a-image>
+            <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
         </a-entity>
         </a-entity>
 
         <!-- Camera ---------------------------------------------->
         <a-entity id="player" position="0 -0.2 0" movement-controls="speed: 0.10000000149011612;">
-            <a-entity id="camera" camera="near: 0.001" position="0 1.7 0"
-                look-controls="pointerLockEnabled: true">
-                <a-entity id="cursor" cursor="fuse: true;"
-                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
-                    position="0 0 -0.1" geometry="primitive: circle; radius: 0.001;"
-                    material="color: #CCC; shader: flat;"
-                    raycaster="far: 10.0; interval: 1500.0; objects: .clickable,.links">
-                </a-entity>
-                <a-entity hand-controls="hand: right"; blink-controls="collisionEntities: #BaseMovimento">
-                    <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
-                </a-entity>
+            <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
+                <a-sphere id="cabeca" radius="0.1"></a-sphere>
+            </a-entity>
+            <a-entity hand-controls="hand: right" ; blink-controls="collisionEntities: #BaseMovimento">
+                <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
             </a-entity>
         </a-entity>
 
         <!-- Lights 
             <a-entity position="-5.117312431335449 2.0466675758361816 2.439497947692871" light="castShadow:false; color:#ffffff; distance:40.0; type:point; intensity:1.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"></a-entity>
----------------------------------------------->
+--------->
 
         <!-- Sky ---------------------------------------------->
         <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
     </a-scene>
+
+    <!-- Função JavaScript ---------------------------------------------->
+    <script>
+        document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel1", function () {
+            this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100; ");
+        });
+
+    </script>
 </body>
 
 </html>
