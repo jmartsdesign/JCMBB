@@ -3,12 +3,13 @@
 
 <head>
     <title>Entrada no Jaqrdim CMBB</title>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
 </head>
+
 <body>
-    <a-scene stats shadow="type: basic; autoUpdate: false;"
+    <a-scene stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse" raycaster="objects: .clickable"
         renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
         <!-- Disable inspector 
         <script>
@@ -40,17 +41,18 @@
 
         <!-- Painel de entrada -->
         <a-entity class="infopanel-1" position="2.43546 1.04687 -0.26634" look-at="[camera]" billboard=""
-            mouse-wheel-zoom="" visible="" rotation="-8.907774840898908 -91.85086413742226 0"
-            scale="2.3 2.3 2.3"><a-image src="#infopanel" position="0.43014 0.06802 -0.06868" height="1.5" width="1.8"
-                material="" geometry="" visible=""></a-image>
+            mouse-wheel-zoom="" visible="" rotation="-8.907774840898908 -91.85086413742226 0" scale="2.3 2.5 2.3">
+            <a-image src="#infopanel" position="0.43 0.01822 -0.09828" height="1.5" width="1.8" material=""
+                geometry="height: 1.8" visible=""></a-image>
             <a-text class="title"
                 font="https://raw.githubusercontent.com/jorgecardoso/aframe-course-resources/master/fonts/montserrat-bold.fnt"
-                position="0.53807 0.41799 -0.02767" width="1" value="Entrada no jardim" align="left" color="#00000f"
+                position="0.53807 0.41799 -0.02767" width="1" value="Jardim da CMBB" align="left" color="#00000f"
                 anchor="center" baseline="top" height="0.02" wrap-count="20" text="" visible=""></a-text>
             <a-text class="description" baseline="top" width="0.9"
                 font="https://raw.githubusercontent.com/jorgecardoso/aframe-course-resources/master/fonts/montserrat.fnt"
                 position="-0.00619 0.30181 -0.01332"
-                value="Esta casa conventual teve a sua origem numa pequena ermida pertencente a Diogo da Azambuja. Em 1494, o Papa Alexandre VI passou o breve da fundação do Convento dos frades eremitas de Santo Agostinho, sendo o seu principal impulsionador Diogo da Azambuja. As obras foram lentas, sendo a igreja a primeira a ser construída. No séc. XX foi classificado como Monumento Nacional e intervencionado. Planta composta pela igreja, sacristia, cozinha, refeitório, claustro, sala do capítulo, celas, portaria e outras dependências."
+                value="A aplicação explora o conceito de emblemática aplicada através da criação de uma experiência imersiva de realidade virtual e realidade aumentada (RV/RA) do Jardim da Casa Museu Bissaya Barreto (CMBB) em Coimbra, Portugal. O jardim, construído nas primeiras décadas do século XX, apresenta uma série de painéis de azulejos barrocos que adaptam motivos logo-icónicos do livro de emblemas Schola Cordis, de Benedictus van Haeften. 
+                A aplicação permite aos utilizadores interagir com os emblemas em 3D, visualizar animações que contam as suas narrativas e explorar a sua relação com o Schola Cordis através de uma experiência imersiva de RV/RA."
                 align="left" color="black" text="">
             </a-text>
         </a-entity>
@@ -59,12 +61,7 @@
         <!-- Camera -->
         <a-entity id="player" position="0 -0.2 0">
             <a-entity id="camera" camera="near: 0.001" position=".5 3 2" look-controls="pointerLockEnabled: true">
-                <a-entity id="cursor" cursor="fuse: true;"
-                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
-                    position="0 0 -0.1" geometry="primitive: circle; radius: 0.001;"
-                    material="color: #CCC; shader: flat;"
-                    raycaster="far: 10.0; interval: 1500.0; objects: .clickable, .links">
-                </a-entity>
+                
                 <!--
                     <a-entity hand-controls="hand: right">
                         <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
