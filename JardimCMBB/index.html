@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
@@ -20,7 +20,8 @@
     <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
     <script type="text/javascript" src="js/webxr.js"></script>
-    <script type="text/javascript" src="js/joystick.js"></script>
+    <!--
+    <script type="text/javascript" src="js/joystick.js"></script> -->
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
@@ -67,7 +68,7 @@
         <!-- Entities ----------------------------------------------->
 
         <!-- Base de movimento Limites -->
-        <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="true"></a-entity>
+        <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="true" nav-mesh></a-entity>
         
         <!-- Lights 
             <a-entity position="-5.117312431335449 2.0466675758361816 2.439497947692871" light="castShadow:false; color:#ffffff; distance:40.0; type:point; intensity:1.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"></a-entity>
@@ -116,7 +117,7 @@
         </a-entity>
 
         <!-- Camera ---------------------------------------------->
-        <a-entity id="player" position="0 -0.2 0" movement-controls="speed: 0.1;">
+        <a-entity id="player" position="0 -0.2 0" movement-controls="speed: 0.1; constrainToNavMesh: true" >
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
