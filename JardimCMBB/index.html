@@ -78,10 +78,10 @@
             </a-entity>
 
             <!-- Portal de entrada para o Jardim CMBB -->
-            <a-entity id="SkyEntrada" position="1000 230 0">
+            <a-entity id="SkyEntrada" position="1000 0 0">
                 <a-sky src="#EntradaCMBB360"></a-sky>
                 <a-entity class="hotstpoHeading" rotation="5.955 -2.052 0.214">
-                    <a-link href="#cameraPos=0,0,0" link="visualAspectEnabled:true" position="0 1 -7"
+                    <a-link  class="clickable" href="#cameraPos=0,0,0" link="visualAspectEnabled:true" position="0 1 -7"
                         rotation="0 28.648 0.000" src="#arrow">
                         <a-image src="#arrow"> </a-image>
                     </a-link>
@@ -152,17 +152,17 @@
                 <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
             </a-entity>
 
-            <!-- Camera ---------------------------------------------->
-            <a-entity id="player" position="1000 -0.2 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
-                <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
-                    <a-sphere id="cabeca" radius="0.1"></a-sphere>
-                </a-entity>
-                <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
-                    <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
-                </a-entity>
-                <a-entity oculus-touch-controls="hand: left">
-                </a-entity>
+        <!-- Camera e PLAYER ---------------------------------------------->
+        <a-entity id="player" position="1000 0 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
+            <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
+                <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
+            <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
+                <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
+            </a-entity>
+            <a-entity oculus-touch-controls="hand: left">
+            </a-entity>
+        </a-entity>
     </a-scene>
 
     <!-- Função JavaScript ---------------------------------------------->
