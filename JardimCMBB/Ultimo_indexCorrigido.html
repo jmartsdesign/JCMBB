@@ -30,8 +30,8 @@
 </head>
 
 <body>
-    <a-scene webcentric="camerarig:#player" stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse"
-        raycaster="objects: .clickable" player-movment
+    <a-scene webcentric="cameraring:#player" stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse"
+        raycaster="objects: .clickable"
         renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
         <!-- Disable inspector  
             <script>
@@ -40,12 +40,10 @@
                     sceneEl.removeAttribute("inspector");
                 });
             </script>  -->
-
         <!-- Salvar o HTML com o A-Inspector (https://github.com/supermedium/aframe-watcher) 
             <a-scene inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">   -->
 
         <!-- Assets ------------------------------------------------->
-
         <a-assets>
             <!--Elementos 3D -->
             <a-asset-item id="JCMBB3D" src="./assets/JardimCMBB-V5.glb"></a-asset-item>
@@ -55,7 +53,6 @@
             <!--imagem cenários 360 -->
             <img id="EntradaCMBB360" crossorigin="anonymous" src="/JardimCMBB/assets/Entrada_CMBB360-01.jpg" />
             <img id="SkyJardimCMBB" crossorigin="anonymous" src="/JardimCMBB/assets/sky.jpg" />
-            <img id="anjos360" crossorigin="anonymous" src="/Assets/anjos360.jpg" />
 
             <!--imagems dos paineis informativo -->
             <img id="infopanel" crossorign="anonymous" src="/Assets/PainelNFO.png" />
@@ -69,18 +66,17 @@
 
             <img id="arrow"
                 src="https://cdn.glitch.com/80978ab7-9db6-45ae-bc43-4fab16bdbb6e%2Farrow.png?v=1589495753054" />
-
         </a-assets>
 
         <!-- Entities ----------------------------------------------->
 
         <!-- Portal de entrada para o Jardim CMBB -->
-        <a-entity id="SkyEntrada" position="1000 0 0" visible="true">
+        <a-entity id="SkyEntrada" position="1000 0 0">
             <a-sky src="#EntradaCMBB360"></a-sky>
-            <a-entity class="hotstpoHeading" rotation="5.955 -2.052 0.214" position="0 0 -5">
-                <a-link id="entrada" class="clickable" position="0 0.5 -3" link="visualAspectEnabled:true"
-                    href="#cameraPos=0,0,0" title="Visitar jardim" on-click="goToGarden">
-                    <a-sphere src="#anjos360"></a-sphere>
+            <a-entity class="hotstpoHeading" rotation="5.955 -2.052 0.214">
+                <a-link class="clickable" href="#cameraPos=0,0,0" link="visualAspectEnabled:true" position="0 1 -7"
+                    rotation="0 28.648 0.000" src="#arrow">
+                    <a-image src="#arrow"> </a-image>
                 </a-link>
             </a-entity>
         </a-entity>
@@ -163,7 +159,7 @@
         </a-entity>
     </a-scene>
 
-    <!-- Função muda paineis (JavaScript) ---------------------------------------------->
+    <!-- Função JavaScript ---------------------------------------------->
     <script>
         /* Painel 01 */
         document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel1", function () {
@@ -174,42 +170,6 @@
             this.setAttribute("animation-mixer", "clip: Cena3; startAt: 100;");
         });
     </script>
-
-    <!-- Função muda player entre sky's 360 (JavaScript) ---------------------------------------------->
-    <script>
-        AFRAME.registerComponent('player-movement', {
-            init: function () {
-                this.isInEntrance = true; // Indica que o jogador começa na entrada
-                this.el.addEventListener('click', this.handleClick.bind(this));
-            },
-
-            handleClick: function (event) {
-                // Verifica se o clique foi em um link
-                if (event.detail.intersection.object.el.tagName.toLowerCase() === 'a-link') {
-                    const linkUrl = event.detail.intersection.object.el.getAttribute('href');
-
-                    // Permite apenas a transição para o jardim
-                    if (linkUrl === '#cameraPos=0,0,0') {
-                        this.goToGarden();
-                    }
-                }
-            },
-
-            goToGarden: function () {
-                const camera = this.el.querySelector('#camera');
-                camera.setAttribute('position', '0 1.7 0'); // Move a câmera para a posição do jardim
-
-                const skyEntrance = document.querySelector('#SkyEntrada');
-                skyEntrance.setAttribute('visible', false); // Oculta o céu da entrada
-
-                const skyGarden = document.querySelector('#SkyPrincipal');
-                skyGarden.setAttribute('visible', true); // Mostra o céu do jardim
-
-                this.isInEntrance = false; // Atualiza o estado para indicar que o jogador não está mais na entrada
-            }
-        });
-    </script>
-
 </body>
 
 </html>
