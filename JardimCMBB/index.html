@@ -237,9 +237,9 @@ AFRAME.registerComponent('webcentric', {
             euler.setFromQuaternion(quaternion, "XZY");
 
             this._curRotation.copy(euler);
-            this._curRotation.x = THREE.Math.radToDeg(this._curRotation.x).toFixed(3);
-            this._curRotation.y = THREE.Math.radToDeg(this._curRotation.y).toFixed(3);
-            this._curRotation.z = THREE.Math.radToDeg(this._curRotation.z).toFixed(3);
+            this._curRotation.x = THREE.MathUtils.radToDeg(this._curRotation.x).toFixed(3);
+            this._curRotation.y = THREE.MathUtils.radToDeg(this._curRotation.y).toFixed(3);
+            this._curRotation.z = THREE.MathUtils.radToDeg(this._curRotation.z).toFixed(3);
 
             //console.log(this._curRotation);
             //console.log(this._lastRotation);
