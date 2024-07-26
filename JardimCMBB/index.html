@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <a-scene webcentric="cameraring:#player" stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse"
+    <a-scene webcentric="cameraring:#scenepos" stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse"
         raycaster="objects: .clickable"
         renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
         <!-- Disable inspector  
@@ -147,7 +147,8 @@
         </a-entity>
 
         <!-- Camera e PLAYER ---------------------------------------------->
-        <a-entity id="player" position="200 0 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
+        <a-entity id="scenepos" position="200 0 0">
+        <a-entity id="player" movement-controls="speed: 0.1; constrainToNavMesh: true">
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
@@ -157,6 +158,7 @@
             <a-entity oculus-touch-controls="hand: left">
             </a-entity>
         </a-entity>
+            </a-entity>
     </a-scene>
 
     <!-- Função JavaScript ---------------------------------------------->
