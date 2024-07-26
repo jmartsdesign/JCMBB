@@ -46,7 +46,7 @@
         <!-- Assets ------------------------------------------------->
         <a-assets>
             <!--Elementos 3D -->
-            <a-asset-item id="JCMBB3D" src="./assets/JardimCMBB-V6.glb"></a-asset-item>
+            <a-asset-item id="JCMBB3D" src="./assets/JardimCMBB-V5.glb"></a-asset-item>
             <a-asset-item id="PalcoEmblema" src="./assets/CenaNE--Anima-V1-2-2.glb"></a-asset-item>
             <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
 
@@ -71,8 +71,8 @@
         <!-- Entities ----------------------------------------------->
 
         <!-- Portal de entrada para o Jardim CMBB -->
-        <a-entity id="SkyEntrada" position="200 0 0">
-            <a-sky src="#EntradaCMBB360" geometry="radius: 100"></a-sky>
+        <a-entity id="SkyEntrada" position="1000 0 0">
+            <a-sky src="#EntradaCMBB360"></a-sky>
             <a-entity class="hotstpoHeading" rotation="5.955 -2.052 0.214">
                 <a-link class="clickable" href="#cameraPos=0,0,0" link="visualAspectEnabled:true" position="0 1 -7"
                     rotation="0 28.648 0.000" src="#arrow">
@@ -82,11 +82,11 @@
         </a-entity>
         <!-- Sky e Entrada do Jardim -------------------->
         <a-entity id="SkyPrincipal" position="0 0 0">
-            <a-sky src="#SkyJardimCMBB" geometry="radius: 100"></a-sky>
+            <a-sky src="#SkyJardimCMBB"></a-sky>
         </a-entity>
 
         <!-- Painel de entrada -->
-        <a-entity class="infopanel-1" position="202.43546 1.04687 -0.26634" look-at="[camera]" billboard=""
+        <a-entity class="infopanel-1" position="1002.43546 1.04687 -0.26634" look-at="[camera]" billboard=""
             mouse-wheel-zoom="" visible="" rotation="-8.907774840898908 -91.85086413742226 0" scale="2.3 2.5 2.3">
             <a-image src="#infopanel" position="0.43 0.01822 -0.09828" height="2" width="1.3" material=""
                 geometry="height: 1.8" visible=""></a-image>
@@ -119,10 +119,10 @@
             event-set__click_2="_event: click; animation-mixer.clip: Cena2"
             sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
 
-        <!-- JardimCMBB 360 
+        <!-- JardimCMBB 360 -->
         <a-link id="vistaCMBB360" class="clickable" position="0 1 12.5" rotation="0 0 0" link="visualAspectEnabled:true"
             href="/index.html" title="Ver Casa Museu"><a-sphere src="#CMBB360"></a-sphere>
-        </a-link> -->
+        </a-link>
 
         <!-- JardimCMBB PAINEIS ------->
         <!-- Painel 01 -->
@@ -147,7 +147,7 @@
         </a-entity>
 
         <!-- Camera e PLAYER ---------------------------------------------->
-        <a-entity id="player" position="200 0 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
+        <a-entity id="player" position="1000 0 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>

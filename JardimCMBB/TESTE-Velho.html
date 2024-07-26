@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Jardim CMBB</title>
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <meta name="description" content="3D Application" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-fps-counter-component@1.0.1/dist/aframe-fps-counter-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-webcentric-component/dist/aframe-webcentric-component.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <a-scene webcentric="camerarig:#player" stats shadow="type: basic; autoUpdate: false;" cursor="rayOrigin:mouse"
+        raycaster="objects: .clickable"
+        renderer="antialias: true; colorManagement: false; physicallyCorrectLights: false;">
+        <!-- Assets ------------------------------------------------->
+        <a-assets>
+            <!--Elementos 3D -->
+            <a-asset-item id="JCMBB3D" src="./assets/JardimCMBB-V5.glb"></a-asset-item>
+            <a-asset-item id="PalcoEmblema" src="./assets/CenaNE--Anima-V1-2-2.glb"></a-asset-item>
+            <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
+
+            <!--imagem cenários 360 -->
+            <img id="EntradaCMBB360" crossorigin="anonymous" src="/JardimCMBB/assets/Entrada_CMBB360-01.jpg" />
+            <img id="SkyJardimCMBB" crossorigin="anonymous" src="/JardimCMBB/assets/sky.jpg" />
+
+            <!--imagems dos paineis informativo -->
+            <img id="infopanel" crossorign="anonymous" src="/Assets/PainelNFO.png" />
+            <img id="infopanel-anjos" crossorigin="anonymous" src="/Assets/infopanel-anjos.png" />
+
+            <!--imagems dos paineis Emblemas -->
+            <img id="PainelCordis-1" crossorign="anonymous" src="/JardimCMBB/assets/PaineCordis-l1.png" />
+
+            <!-- Audio -->
+            <audio id="SoundP1" src="/JardimCMBB/assets/P1-2024-7-15-17-39-51.mp3"></audio>
+
+            <img id="arrow"
+                src="https://cdn.glitch.com/80978ab7-9db6-45ae-bc43-4fab16bdbb6e%2Farrow.png?v=1589495753054" />
+        </a-assets>
+
+        <!-- Entities ----------------------------------------------->
+        <!-- Portal de entrada para o Jardim CMBB -->
+        <a-entity id="SkyEntrada" position="1000 0 0">
+            <a-sky src="#EntradaCMBB360"></a-sky>
+            <a-entity class="hotstpoHeading" rotation="5.955 -2.052 0.214">
+                <a-link class="clickable" id="link-to-skyprincipal" position="0 1 -7"
+                    rotation="0 28.648 0.000" href="#cameraPos=0,0,0" src="#arrow">
+                    <a-image src="#arrow"> </a-image>
+                </a-link>
+            </a-entity>
+        </a-entity>
+        <!-- Sky e Entrada do Jardim -->
+        <a-entity id="SkyPrincipal" position="0 0 0">
+            <a-sky src="#SkyJardimCMBB"></a-sky>
+        </a-entity>
+
+        <!-- Painel de entrada -->
+        <a-entity class="infopanel-1" position="1002.43546 1.04687 -0.26634" look-at="[camera]" billboard=""
+            mouse-wheel-zoom="" visible="" rotation="-8.907774840898908 -91.85086413742226 0" scale="2.3 2.5 2.3">
+            <a-image src="#infopanel" position="0.43 0.01822 -0.09828" height="2" width="1.3" material=""
+                geometry="height: 1.8" visible=""></a-image>
+            <a-text class="title"
+                font="https://raw.githubusercontent.com/jorgecardoso/aframe-course-resources/master/fonts/montserrat-bold.fnt"
+                position="0.53807 0.41799 -0.02767" width="1" value="Jardim da CMBB" align="left" color="#00000f"
+                anchor="center" baseline="top" height="0.02" wrap-count="20" text="" visible=""></a-text>
+            <a-text class="description" baseline="top" width="0.9"
+                font="https://raw.githubusercontent.com/jorgecardoso/aframe-course-resources/master/fonts/montserrat.fnt"
+                position="-0.00619 0.30181 -0.01332"
+                value="A aplicação explora o conceito de emblemática aplicada através da criação de uma experiência imersiva de realidade virtual e realidade aumentada (RV/RA) do Jardim da Casa Museu Bissaya Barreto (CMBB) em Coimbra, Portugal. O jardim, construído nas primeiras décadas do século XX, apresenta uma série de painéis de azulejos barrocos que adaptam motivos logo-icónicos do livro de emblemas Schola Cordis, de Benedictus van Haeften. 
+                    A aplicação permite aos utilizadores interagir com os emblemas em 3D, visualizar animações que contam as suas narrativas e explorar a sua relação com o Schola Cordis através de uma experiência imersiva de RV/RA."
+                align="left" color="black" text="">
+            </a-text>
+        </a-entity>
+
+        <!-- Base de movimento Limites -->
+        <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="true" nav-mesh></a-entity>
+
+        <!-- JArdim CMBB 3D -->
+        <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
+
+        <!-- Palco e Emblema 3D -->
+        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" class="clickable" gltf-model="#PalcoEmblema"
+            scale="0.2 0.2 0.2" shadow="cast: false" position="-6.586 1.2 -15.314"
+            animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena1"
+            event-set__click_1="_event: click; animation-mixer.clip: Cena1"
+            event-set__click_2="_event: click; animation-mixer.clip: Cena2"
+            sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
+
+        <!-- JardimCMBB 360 -->
+        <a-link id="vistaCMBB360" class="clickable" position="-11.85733 0.8 3.65096" title="CMBB" href="#"
+            visible="false" image="#arrow">
+            <a-image src="#arrow"></a-image>
+        </a-link>
+
+        <!-- JardimCMBB PAINEIS -->
+        <!-- Painel 01 -->
+        <a-box width="2" height="2" depth="1.5" position="-11.84733 1.6 1.75" color="red"
+            aabb-collider="objects: #cabeca; debug:true;" visible="false"
+            event-set__coliliderstart="_event: hitstart; _target:#infopanel1; visible:true"
+            event-set__coliliderend="_event: hitend; _target:#infopanel1; visible:false"
+            proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"></a-box>
+        <a-entity id="infopanel1" class="infopanel" position="-13 1.6 1.75" look-at="camera" visible="false"
+            rotation="0 90 0">
+            <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
+        </a-entity>
+        <!-- Painel 02 -->
+        <a-box width="2" height="2" depth="1.5" position="-11.84733 1.6 -0.36096" color="red"
+            aabb-collider="objects: #cabeca; debug:true;" visible="false"
+            event-set__coliliderstart="_event: hitstart; _target:#infopanel2; visible:true"
+            event-set__coliliderend="_event: hitend; _target:#infopanel2; visible:false"
+            proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel2"></a-box>
+        <a-entity id="infopanel2" class="infopanel" position="-13 1.6 -0.33457" look-at="camera" visible="false"
+            rotation="0 90 0">
+            <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
+        </a-entity>
+
+        <!-- Camera e PLAYER -->
+        <a-entity id="player" position="1000 0 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
+            <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
+                <a-sphere id="cabeca" radius="0.1"></a-sphere>
+            </a-entity>
+            <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
+                <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
+            </a-entity>
+            <a-entity oculus-touch-controls="hand: left"></a-entity>
+        </a-entity>
+    </a-scene>
+
+    <!-- Função JavaScript -->
+    <script>
+        document.querySelector("#link-to-skyprincipal").addEventListener("click", function (e) {
+            e.preventDefault();
+            const href = e.target.getAttribute("href");
+            if (href.startsWith("#cameraPos=")) {
+                const coords = href.replace("#cameraPos=", "").split(",");
+                const x = parseFloat(coords[0]);
+                const y = parseFloat(coords[1]);
+                const z = parseFloat(coords[2]);
+                document.querySelector("#player").setAttribute("position", `${x} ${y} ${z}`);
+            }
+        });
+
+        /* Painel 01 */
+        document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel1", function () {
+            this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100;");
+        });
+        /* Painel 02 */
+        document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel2", function () {
+            this.setAttribute("animation-mixer", "clip: Cena3; startAt: 100;");
+        });
+    </script>
+</body>
+</html>
