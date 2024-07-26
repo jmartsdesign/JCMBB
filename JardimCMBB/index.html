@@ -26,7 +26,9 @@
     <script type="text/javascript" src="js/joystick.js"></script> -->
     <script>
 AFRAME.registerComponent('webcentric', {
-    schema: {type: "selector", default: "#camerarig"},
+    schema: {
+        camerarig: {type: "selector", default: "#camerarig"}
+},
 
     /**
      * Set if component needs multiple instancing.
