@@ -336,10 +336,10 @@
                 <a-entity class="hotstpoHeading" rotation="5.955 -2.052 0.214">
                     <a-link
                         class="clickable"
-                        href="#cameraPos=0,0,0"
+                        href="#cameraPos=-8,0,9"
                         link="visualAspectEnabled:true"
                         position="0 1 -7"
-                        rotation="0 28.648 0.000"
+                        rotation="0 00.000"
                         src="#arrow">
                         <a-image src="#arrow"> </a-image>
                     </a-link>
@@ -429,13 +429,13 @@
             href="/index.html" title="Ver Casa Museu"><a-sphere src="#CMBB360"></a-sphere>
         </a-link> -->
 
-            <!-- JardimCMBB PAINEIS ------->
+            <!-- JardimCMBB PAINEIS ------------------->
             <!-- Painel 01 -->
             <a-box
                 width="2"
                 height="2"
                 depth="1.5"
-                position="-12 1.6 1.75"
+                position="-12 1.4 1.75"
                 color="red"
                 aabb-collider="objects: #cabeca; debug:true;"
                 visible="false"
@@ -445,7 +445,7 @@
             <a-entity
                 id="CordisPanel-1"
                 class="infopanel"
-                position="-13.6 1.6 1.75"
+                position="-13.6 1.4 1.75"
                 look-at="camera"
                 visible="false"
                 rotation="0 90 0">
@@ -456,7 +456,7 @@
                 width="2"
                 height="2"
                 depth="1.5"
-                position="-12 1.6 -0.35"
+                position="-12 1.4 -0.35"
                 color="red"
                 aabb-collider="objects: #cabeca; debug:true;"
                 visible="false"
@@ -466,7 +466,7 @@
             <a-entity
                 id="CordisPanel-2"
                 class="infopanel"
-                position="-13.6 1.6 -0.35"
+                position="-13.6 1.4 -0.35"
                 look-at="camera"
                 visible="false"
                 rotation="0 90 0">
@@ -477,7 +477,7 @@
                 width="2"
                 height="2"
                 depth="1.5"
-                position="-12 1.6 -2.4"
+                position="-12 1.4 -2.4"
                 color="red"
                 aabb-collider="objects: #cabeca; debug:true;"
                 visible="false"
@@ -487,11 +487,158 @@
             <a-entity
                 id="CordisPanel-3"
                 class="infopanel"
-                position="-13.6 1.6 -2.4"
+                position="-13.6 1.4 -2.4"
                 look-at="camera"
                 visible="false"
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-3" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 04 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -4.4"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-4; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-4; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel4"></a-box>
+            <a-entity
+                id="CordisPanel-4"
+                class="infopanel"
+                position="-13.6 1.4 -4.4"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-4" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 05 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -6.4"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-5; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-5; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel5"></a-box>
+            <a-entity
+                id="CordisPanel-5"
+                class="infopanel"
+                position="-13.6 1.4 -6.4"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-5" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 06 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -11.7"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-6; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-6; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel6"></a-box>
+            <a-entity
+                id="CordisPanel-6"
+                class="infopanel"
+                position="-13.6 1.4 -11.7"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-6" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 07 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -13.7"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-7; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-7; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel7"></a-box>
+            <a-entity
+                id="CordisPanel-7"
+                class="infopanel"
+                position="-13.6 1.4 -13.7"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-7" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 08 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -15.7"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-8; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-8; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel8"></a-box>
+            <a-entity
+                id="CordisPanel-8"
+                class="infopanel"
+                position="-13.6 1.4 -15.7"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-8" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 09 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -17.7"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-9; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-9; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel9"></a-box>
+            <a-entity
+                id="CordisPanel-9"
+                class="infopanel"
+                position="-13.6 1.4 -17.7"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-9" height="2" width="2"></a-image>
+            </a-entity>
+            <!-- Painel 10 -->
+            <a-box
+                width="2"
+                height="2"
+                depth="1.5"
+                position="-12 1.4 -19.7"
+                color="red"
+                aabb-collider="objects: #cabeca; debug:true;"
+                visible="false"
+                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-10; visible:true"
+                event-set__coliliderend="_event: hitend; _target:#CordisPanel-10; visible:false"
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel10"></a-box>
+            <a-entity
+                id="CordisPanel-10"
+                class="infopanel"
+                position="-13.6 1.4 -19.5"
+                look-at="camera"
+                visible="false"
+                rotation="0 90 0">
+                <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
             </a-entity>
 
             <!-- Camera e PLAYER ---------------------------------------------->
@@ -507,12 +654,26 @@
                     <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
                         <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
                     </a-entity>
-                    <a-entity oculus-touch-controls="hand: left"> </a-entity>
+                    <a-entity oculus-touch-controls="hand: left" id="LeftControl">
+                        <a-entity
+                            id="PalcoEmblemaPortable"
+                            rotation="0 0 0"
+                            class="clickable"
+                            gltf-model="#PalcoEmblema"
+                            scale="0.01 0.01 0.01"
+                            shadow="cast: false"
+                            position="0 .05 0"
+                            animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
+                            animation-mixer="clip: Cena1"
+                            event-set__click_1="_event: click; animation-mixer.clip: Cena1"
+                            event-set__click_2="_event: click; animation-mixer.clip: Cena2"
+                            sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
+                    </a-entity>
                 </a-entity>
             </a-entity>
         </a-scene>
 
-        <!-- Função JavaScript ---------------------------------------------->
+        <!-- Função Contrala animação dos emblemas JavaScript ---------------------------------------------->
         <script>
             /* Painel 01 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel1", function () {
@@ -525,6 +686,34 @@
             /* Painel 03 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel3", function () {
                 this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100;");
+            });
+            /* Painel 04 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel4", function () {
+                this.setAttribute("animation-mixer", "clip: Cena4; startAt: 100;");
+            });
+            /* Painel 05 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel5", function () {
+                this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100;");
+            });
+            /* Painel 06 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel6", function () {
+                this.setAttribute("animation-mixer", "clip: Cena6; startAt: 100;");
+            });
+            /* Painel 07 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel7", function () {
+                this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100;");
+            });
+            /* Painel 08 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel8", function () {
+                this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100;");
+            });
+            /* Painel 09 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel9", function () {
+                this.setAttribute("animation-mixer", "clip: Cena9; startAt: 100;");
+            });
+            /* Painel 10 */
+            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel10", function () {
+                this.setAttribute("animation-mixer", "clip: Cena10; startAt: 100;");
             });
         </script>
     </body>
