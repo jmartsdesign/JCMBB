@@ -426,21 +426,6 @@ ws<html lang="en">
                 visible="true"
                 shadow="cast: false"></a-entity>
 
-            <!-- Entrada CMBB 360 -->
-        <a-box
-          cloak
-          width="10"
-          depth="10.1"
-          height="7.7"
-          position="-14 3 12.5"
-          color="blue"
-        ></a-box>
-            <a-entity
-                id="EntradaCMBBe360"
-                gltf-model="#EntradaCMBB"
-                scale="1 1 1"
-                visible="true"
-                shadow="cast: false"></a-entity>
 
             <!-- Base de movimento Limites -->
             <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="true" nav-mesh></a-entity>
@@ -679,8 +664,27 @@ ws<html lang="en">
                 <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
             </a-entity>
 
+
+            
+            <!-- Entrada CMBB 360 -->
+        <a-box
+          cloak
+          width="10"
+          depth="10.1"
+          height="7.7"
+          position="-14 3 12.5"
+          color="blue"
+        ></a-box>
+            <a-entity
+                id="EntradaCMBBe360"
+                gltf-model="#EntradaCMBB"
+                scale="1 1 1"
+                visible="true"
+                shadow="cast: false"></a-entity>
+
+            
             <!-- Camera e PLAYER ---------------------------------------------->
-            <a-entity id="camerarig" position="200 0 0">
+            <a-entity id="camerarig" position="0 0 0">
                 <a-entity id="player" movement-controls="speed: 0.1; constrainToNavMesh: true">
                     <a-entity
                         id="camera"
