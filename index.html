@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+ws<html lang="en">
     <!-- Codigo inicial gerado automaticamente by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter
     MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE 
     Modificado e adptado por Jorge Antunes-->
@@ -287,9 +287,10 @@
             <!-- Assets ------------------------------------------------->
             <a-assets>
                 <!--Elementos 3D -->
-                <a-asset-item id="JCMBB3D" src="./assets/JardimCMBB-V6.glb"></a-asset-item>
+                <a-asset-item id="JCMBB3D" src="./assets/JCMBB3D.glb"></a-asset-item>
                 <a-asset-item id="PalcoEmblema" src="./assets/CenaNE--Anima-V1-2-2.glb"></a-asset-item>
-                <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
+                <a-asset-item id="EntradaCMBB" src="./assets/e-Entrada360.glb"></a-asset-item>
+                <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento-e360.glb"></a-asset-item>
 
                 <!--imagem cenários 360 -->
                 <img id="EntradaCMBB360" crossorigin="anonymous" src="./assets/Entrada_CMBB360-01.jpg" />
@@ -396,9 +397,6 @@
                 </a-text>
             </a-entity>
 
-            <!-- Base de movimento Limites -->
-            <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="true" nav-mesh></a-entity>
-
             <!-- JArdim CMBB 3D -->
             <a-entity
                 id="JardimCMBB"
@@ -406,6 +404,17 @@
                 scale="1 1 1"
                 visible="true"
                 shadow="cast: false"></a-entity>
+
+            <!-- Entrada CMBB 360 -->
+            <a-entity
+                id="EntradaCMBBe360"
+                gltf-model="#EntradaCMBB"
+                scale="1 1 1"
+                visible="true"
+                shadow="cast: false"></a-entity>
+
+            <!-- Base de movimento Limites -->
+            <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="true" nav-mesh></a-entity>
 
             <!-- Palco e Emblema 3D -->
 
