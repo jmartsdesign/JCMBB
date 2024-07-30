@@ -19,22 +19,6 @@
         <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
         <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
-<<<<<<< Updated upstream
-
-        <script>
-            AFRAME.registerComponent("cloak", {
-
-                setRenderOrder: function(el, order) {
-                    let mesh = el.getObject3D('mesh')
-                    let _this = this;
-                    if (!mesh) {
-                        el.addEventListener('model-loaded', function(){
-                            _this.setRenderOrder(el, order);
-                        });
-                        return
-                    }
-                    console.log("setting render order on ", el, "to ", order)
-=======
         <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
         <script src="https://unpkg.com/aframe-proxemic-component@0.0.21/dist/aframe-proxemic-component.min.js"></script>
 
@@ -50,18 +34,13 @@
                         return;
                     }
                     console.log("setting render order on ", el, "to ", order);
->>>>>>> Stashed changes
                     mesh.renderOrder = order;
                 },
                 init: function () {
                     console.log("Setting cloak");
                     let cloak = this.el;
 
-<<<<<<< Updated upstream
-                    console.log("Cloak loaded")
-=======
                     console.log("Cloak loaded");
->>>>>>> Stashed changes
                     let mesh = cloak.getObject3D("mesh"); // grab the mesh
                     if (mesh === undefined) {
                         console.log("no mesh");
@@ -77,24 +56,11 @@
                         }
                     });
                     mesh.renderOrder = 1;
-<<<<<<< Updated upstream
-                    console.log(cloak.children)
-                    for (const child of cloak.children) {
-                        this.setRenderOrder(child, 11);
-
-                    }
-
-
-
-
-                },
-=======
                     console.log(cloak.children);
                     for (const child of cloak.children) {
                         this.setRenderOrder(child, 11);
                     }
                 }
->>>>>>> Stashed changes
             });
         </script>
         <link rel="stylesheet" type="text/css" href="style.css" />
@@ -103,16 +69,9 @@
     <body>
         <a-scene
             webcentric
-<<<<<<< Updated upstream
-           renderer="physicallyCorrectLights: true"
-            cursor="rayOrigin:mouse"
-            raycaster="objects: .clickable"
-           >
-=======
             renderer="physicallyCorrectLights: false"
             cursor="rayOrigin:mouse"
             raycaster="objects: .clickable">
->>>>>>> Stashed changes
             <!-- Disable inspector  
             <script>
                 var sceneEl = document.querySelector("a-scene");
@@ -481,25 +440,6 @@
                 <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
             </a-entity>
 
-<<<<<<< Updated upstream
-
-            
-            <!-- Entrada CMBB 360 -->
-        <a-sphere
-          cloak
-          radius="5"
-          position="-14.5 2 13"
-        >
-            <a-entity
-                    id="EntradaCMBBe360"
-                    gltf-model="#EntradaCMBB"
-                    scale="1 1 1"
-                    visible="true"
-                    position="14.5 -2 -13"
-            ></a-entity>
-        </a-sphere>
-
-=======
             <!-- Entrada no Jardim da CMBB 360 ------------>
             <a-sphere cloak radius="5" position="-14.5 2 13">
                 <a-entity
@@ -520,13 +460,8 @@
                 event-set__proximityexit="rotation: 0 -45 0">
                 <a-box width="1" height="2" depth="0.1" position="0.58456 0 -0.47136" color="red"></a-box>
             </a-entity>
->>>>>>> Stashed changes
 
             <!-- Camera e PLAYER ---------------------------------------------->
-<<<<<<< Updated upstream
-
-                <a-entity id="player" position="-14.5 0 13" movement-controls="speed: 0.1; constrainToNavMesh: true">
-=======
             <a-entity id="player" position="-14.5 0 13" movement-controls="speed: 0.1; constrainToNavMesh: true">
                 <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                     <a-sphere id="cabeca" radius="0.1"></a-sphere>
@@ -535,7 +470,6 @@
                     <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
                 </a-entity>
                 <a-entity oculus-touch-controls="hand: left" id="LeftControl">
->>>>>>> Stashed changes
                     <a-entity
                         id="PalcoEmblemaPortable"
                         rotation="0 0 0"
