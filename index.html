@@ -22,6 +22,47 @@
         <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
         <script src="https://unpkg.com/aframe-proxemic-component@0.0.21/dist/aframe-proxemic-component.min.js"></script>
 
+        <script>
+            AFRAME.registerComponent("cloak", {
+                setRenderOrder: function (el, order) {
+                    let mesh = el.getObject3D("mesh");
+                    let _this = this;
+                    if (!mesh) {
+                        el.addEventListener("model-loaded", function () {
+                            _this.setRenderOrder(el, order);
+                        });
+                        return;
+                    }
+                    console.log("setting render order on ", el, "to ", order);
+                    mesh.renderOrder = order;
+                },
+                init: function () {
+                    console.log("Setting cloak");
+                    let cloak = this.el;
+
+                    console.log("Cloak loaded");
+                    let mesh = cloak.getObject3D("mesh"); // grab the mesh
+                    if (mesh === undefined) {
+                        console.log("no mesh");
+                        return;
+                    } // return if no mesh :(
+                    mesh.traverse(function (node) {
+                        // traverse through and apply settings
+                        if (node.isMesh && node.material) {
+                            // make sure the element can be a cloak
+                            console.log(node);
+                            node.material.colorWrite = false;
+                            node.material.needsUpdate = true;
+                        }
+                    });
+                    mesh.renderOrder = 1;
+                    console.log(cloak.children);
+                    for (const child of cloak.children) {
+                        this.setRenderOrder(child, 11);
+                    }
+                }
+            });
+        </script>
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
 
@@ -423,6 +464,51 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
             </a-entity>
+
+            <!-- Entrada no Jardim da CMBB 360 ------------>
+            <a-sphere cloak radius="5" position="-14.5 2 13">
+                <a-entity
+                    id="EntradaCMBBe360"
+                    gltf-model="#EntradaCMBB"
+                    scale="1 1 1"
+                    visible="true"
+                    position="14.5 -2 -13"></a-entity>
+            </a-sphere>
+                            
+            <a-entity
+                id="door1"
+                position="-11.774 1.778 9.161"
+                rotation="0 -45 0"
+                scale="1.383 1.819 1.019"
+                proximity-sensor="distance: 3"
+                event-set__proximityenter="rotation: 0 45 0"
+                event-set__proximityexit="rotation: 0 -45 0">
+                <a-box width="1" height="2" depth="0.1" position="0.58456 0 -0.47136" color="red"></a-box>
+            </a-entity>
+
+            <!-- Camera e PLAYER ---------------------------------------------->
+            <a-entity id="player" position="-14.5 0 13" movement-controls="speed: 0.1; constrainToNavMesh: true">
+                <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
+                    <a-sphere id="cabeca" radius="0.1"></a-sphere>
+                </a-entity>
+                <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
+                    <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
+                </a-entity>
+                <a-entity oculus-touch-controls="hand: left" id="LeftControl">
+                    <a-entity
+                        id="PalcoEmblemaPortable"
+                        rotation="0 0 0"
+                        class="clickable"
+                        gltf-model="#PalcoEmblema"
+                        scale="0.01 0.01 0.01"
+                        shadow="cast: false"
+                        position="0 .05 0"
+                        animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
+                        animation-mixer="clip: Cena1"
+                        event-set__click_1="_event: click; animation-mixer.clip: Cena1"
+                        event-set__click_2="_event: click; animation-mixer.clip: Cena2"
+                        sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
+                </a-entity>
         </a-scene>
 
         <!-- Função Contrala animação dos emblemas JavaScript ---------------------------------------------->
