@@ -24,6 +24,7 @@
 
         <script>
             AFRAME.registerComponent("cloak", {
+                schema: {type: 'selectorAll'},
                 setRenderOrder: function (el, order) {
                     let mesh = el.getObject3D("mesh");
                     let _this = this;
@@ -57,7 +58,7 @@
                     });
                     mesh.renderOrder = 1;
                     console.log(cloak.children);
-                    for (const child of cloak.children) {
+                    for (const child of this.data) {
                         this.setRenderOrder(child, 11);
                     }
                 }
@@ -441,15 +442,16 @@
             </a-entity>
 
             <!-- Entrada no Jardim da CMBB 360 ------------>
-            <a-sphere cloak radius="5" position="-14.5 2 13">
-                <a-entity
+            <a-sphere  cloak="#EntradaCMBBe360" radius="5" position="-14.5 2 13" geometry="phiLength: 330" rotation="-11.161217849148436 -127.17027446046673 41.43573478606601">
+            </a-sphere>
+
+            <a-entity
                     id="EntradaCMBBe360"
                     gltf-model="#EntradaCMBB"
                     scale="1 1 1"
                     visible="true"
-                    position="14.5 -2 -13"></a-entity>
-            </a-sphere>
-                            
+                    ></a-entity>
+
             <a-entity
                 id="door1"
                 position="-11.774 1.778 9.161"
