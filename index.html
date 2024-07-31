@@ -50,6 +50,8 @@
                 <a-asset-item id="EntradaCMBB" src="./assets/e-Entrada360.glb"></a-asset-item>
                 <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
 
+                <img id="PortaoEntrada" src="./assets/portao.png" />
+
                 <!--imagem cenários 360 -->
                 <img id="EntradaCMBB360" crossorigin="anonymous" src="./assets/Entrada_CMBB360-01.jpg" />
                 <img id="SkyJardimCMBB" crossorigin="anonymous" src="./assets/sky.jpg" />
@@ -82,9 +84,6 @@
                 <audio id="SoundP9" src="./assets/NarrativaAudio/P9-2024-7-18-15-53-57.mp3"></audio>
                 <audio id="SoundP10" src="./assets/NarrativaAudio/P10-2024-7-18-15-56-26.mp3"></audio>
 
-                <img
-                    id="arrow"
-                    src="https://cdn.glitch.com/80978ab7-9db6-45ae-bc43-4fab16bdbb6e%2Farrow.png?v=1589495753054" />
             </a-assets>
 
             <!-- Entities ----------------------------------------------->
@@ -127,7 +126,7 @@
             <!-- Entrada exterior no Jardim da CMBB 360 ------------>
             <a-sphere
                 cloak="#EntradaCMBBe360"
-                radius="5"
+                radius="6"
                 position="-14.5 2 13"
                 geometry="phiLength: 330"
                 rotation="-11.161217849148436 -127.17027446046673 41.43573478606601">
@@ -135,13 +134,13 @@
             <a-entity id="EntradaCMBBe360" gltf-model="#EntradaCMBB" scale="1 1 1" visible="true"></a-entity>
             <a-entity
                 id="door1"
-                position="-11.774 1.778 9.161"
+                position="-11.893 1.778 9.354"
                 rotation="0 -45 0"
                 scale="1.383 1.819 1.019"
-                proximity-sensor="distance: 4"
+                proximity-sensor="distance: 3"
                 animation__open="property: rotation; to: 0 45 0; dur: 1000; startEvents: proximityenter"
                 animation__close="property: rotation; to: 0 -45 0; dur: 1000; startEvents: proximityexit">
-                <a-box width="1" height="2" depth="0.1" position="0.58456 0 -0.47136" color="red"></a-box>
+                <a-plane src="#PortaoEntrada" width="1" height="2" depth="0.1" position="0.633 0 -0.062" transparent="true" side:"double"></a-plane>
             </a-entity>
 
             <!-- Painel de entrada exterior -->
@@ -198,7 +197,7 @@
                 visible="true"
                 shadow="cast: false"></a-entity>
 
-            <!-- Palco e Emblema 3D -->
+            <!-- Palco e Emblema 3D ------------------------------------------->
 
             <!-- animation-mixer="useRegExp: true;  clip: DemonStay|WomanStay|HeartBeating" (anima todas as ainmações no ficheiro) -->
             <a-entity
