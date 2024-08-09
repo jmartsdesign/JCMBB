@@ -106,7 +106,7 @@
                         shadow="cast: false"
                         position="0 .05 0"
                         animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
-                        animation-mixer="clip: Cena1"></a-entity>
+                        animation-mixer="clip: Cena0"></a-entity>
                 </a-entity>
             </a-entity>
 
@@ -209,13 +209,14 @@
                 shadow="cast: false"
                 position="-6.586 1.2 -15.314"
                 animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
-                animation-mixer="clip: Cena1"
-                event-set__click_1="_event: click; animation-mixer.clip: Cena1"
+                animation-mixer="clip: Cena0"
+                event-set__click_1="_event: click; animation-mixer.clip: Cena0"
                 event-set__click_2="_event: click; animation-mixer.clip: Cena2"
                 sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
 
             <!-- JardimCMBB PAINEIS ------------------->
             <!-- Painel 01 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -226,7 +227,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-1; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-1; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-1"
                 class="infopanel"
@@ -236,7 +238,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 02 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -247,7 +251,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-2; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-2; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel2"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel2"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-2"
                 class="infopanel"
@@ -257,7 +262,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-2" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 03 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -268,7 +275,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-3; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-3; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel3"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel3"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-3"
                 class="infopanel"
@@ -278,7 +286,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-3" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 04 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -289,7 +299,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-4; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-4; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel4"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel4"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-4"
                 class="infopanel"
@@ -299,7 +310,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-4" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 05 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -310,7 +323,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-5; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-5; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel5"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel5"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>></a-box>
             <a-entity
                 id="CordisPanel-5"
                 class="infopanel"
@@ -320,7 +334,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-5" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 06 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -331,7 +347,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-6; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-6; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel6"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel6"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-6"
                 class="infopanel"
@@ -341,7 +358,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-6" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 07 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -352,7 +371,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-7; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-7; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel7"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel7"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-7"
                 class="infopanel"
@@ -362,7 +382,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-7" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 08 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -373,7 +395,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-8; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-8; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel8"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel8"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-8"
                 class="infopanel"
@@ -383,7 +406,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-8" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 09 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -394,7 +419,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-9; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-9; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel9"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel9"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-9"
                 class="infopanel"
@@ -404,7 +430,9 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-9" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
             <!-- Painel 10 -->
+            <a-entity id="SceneController">
             <a-box
                 width="2"
                 height="2"
@@ -415,7 +443,8 @@
                 visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-10; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-10; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel10"></a-box>
+                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel10"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-10"
                 class="infopanel"
@@ -425,6 +454,7 @@
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
             </a-entity>
+        </a-entity>
         </a-scene>
 
         <!-- Função Contrala animação dos emblemas JavaScript ---------------------------------------------->
@@ -447,29 +477,55 @@
             });
             /* Painel 05 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel5", function () {
-                this.setAttribute("animation-mixer", "clip: Cena0; startAt: 100;");
+                this.setAttribute("animation-mixer", "clip: Cena5; startAt: 100;");
             });
             /* Painel 06 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel6", function () {
-                this.setAttribute("animation-mixer", "clip: Cena0; startAt: 100;");
+                this.setAttribute("animation-mixer", "clip: Cena6; startAt: 100;");
             });
             /* Painel 07 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel7", function () {
-                this.setAttribute("animation-mixer", "clip: Cena0; startAt: 100;");
+                this.setAttribute("animation-mixer", "clip: Cena7; startAt: 100;");
             });
             /* Painel 08 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel8", function () {
-                this.setAttribute("animation-mixer", "clip: Cena0; startAt: 100;");
+                this.setAttribute("animation-mixer", "clip: Cena8; startAt: 100;");
             });
             /* Painel 09 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel9", function () {
-                this.setAttribute("animation-mixer", "clip: Cena0; startAt: 100;");
+                this.setAttribute("animation-mixer", "clip: Cena9; startAt: 100;");
             });
             /* Painel 10 */
             document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel10", function () {
-                this.setAttribute("animation-mixer", "clip: Cena0; startAt: 100;");
+                this.setAttribute("animation-mixer", "clip: Cena10; startAt: 100;");
             });
         </script>
+
+<!-- Função Contrala animação dos emblemas Retornando á Cen0 JavaScript ---------------------------------------------->
+<script>
+    AFRAME.registerComponent('scene-controller', {
+        init: function () {
+            var el = this.el;
+            
+            // Configurar listeners para cada painel
+            for (var i = 1; i <= 10; i++) {
+                (function(sceneNumber) {
+                    el.addEventListener('hitPainel' + sceneNumber, function () {
+                        el.setAttribute('animation-mixer', 'clip: Cena' + sceneNumber + '; startAt: 100;');
+                    });
+                })(i);
+            }
+            
+            // Listener genérico para sair de qualquer painel
+            el.addEventListener('exitPainel', function () {
+                el.setAttribute('animation-mixer', 'clip: Cena0; startAt: 0;');
+            });
+        }
+    });
+    
+    // Adicionar o componente ao elemento PalcoEmblema_1
+    document.querySelector('#PalcoEmblema_1').setAttribute('scene-controller', '');
+</script>
 
         <!-- Função torna invisivel exteriormente a entrada ---------------------------------------------->
         <script>
