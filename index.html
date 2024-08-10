@@ -73,6 +73,8 @@
                 <img id="PainelCordis-10" crossorign="anonymous" src="./assets/PaineisInfo/P10.png" />
 
                 <!-- Audio -->
+                <audio id="SoundAmbi" src="./assets/NarrativaAudio/contemplation-227152.mp3"></audio>
+                <audio id="SoundP0" src="./assets/NarrativaAudio/Silencio.mp3"></audio>
                 <audio id="SoundP1" src="./assets/NarrativaAudio/P1-2024-7-15-17-39-51.mp3"></audio>
                 <audio id="SoundP2" src="./assets/NarrativaAudio/P2-2024-7-18-16-28-22.mp3"></audio>
                 <audio id="SoundP3" src="./assets/NarrativaAudio/P3-2024-7-18-16-29-37.mp3"></audio>
@@ -89,7 +91,8 @@
             <!-- Entities ----------------------------------------------->
 
             <!-- Camera e PLAYER -------------------------------------------------------------------------------------->
-            <a-entity id="player" position="-15 0 15" rotation="0 -40 0" movement-controls="speed: 0.1; constrainToNavMesh: true">
+            <a-entity id="player" position="-15 0 15" rotation="0 -40 0" movement-controls="speed: 0.1; constrainToNavMesh: true"
+            sound="src: #SoundAmbi; volume: 2; autoplay: true; loop: true" >
                 <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                     <a-sphere id="cabeca" radius="0.1"></a-sphere>
                 </a-entity>
@@ -106,6 +109,7 @@
                         shadow="cast: false"
                         position="0 .05 0"
                         animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
+                        
                         animation-mixer="clip: Cena0"></a-entity>
                 </a-entity>
             </a-entity>
@@ -197,6 +201,19 @@
                 visible="true"
                 shadow="cast: false"></a-entity>
 
+            <!-- Adiciona o elementos áudio à cena -->
+            <a-entity id="sound0" sound="src: #SoundP0; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound1" sound="src: #SoundP1; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound2" sound="src: #SoundP2; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound3" sound="src: #SoundP3; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound4" sound="src: #SoundP4; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound5" sound="src: #SoundP5; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound6" sound="src: #SoundP6; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound7" sound="src: #SoundP7; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound8" sound="src: #SoundP8; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound9" sound="src: #SoundP9; volume: 70; autoplay: false"></a-entity>
+            <a-entity id="sound10" sound="src: #SoundP10; volume: 70; autoplay: false"></a-entity>
+
             <!-- Palco e Emblema 3D ------------------------------------------->
 
             <!-- animation-mixer="useRegExp: true;  clip: DemonStay|WomanStay|HeartBeating" (anima todas as ainmações no ficheiro) -->
@@ -210,9 +227,8 @@
                 position="-6.586 1.2 -15.314"
                 animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
                 animation-mixer="clip: Cena0"
-                event-set__click_1="_event: click; animation-mixer.clip: Cena0"
-                event-set__click_2="_event: click; animation-mixer.clip: Cena2"
-                sound="src: #SoundP1; on: click; volume: 50; autoplay: true"></a-entity>
+
+                ></a-entity>
 
             <!-- JardimCMBB PAINEIS ------------------->
             <!-- Painel 01 -->
@@ -229,7 +245,8 @@
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-1; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"
                 proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
-            <a-entity
+            <!-- Mostra o Painel Azulejo -->
+                <a-entity
                 id="CordisPanel-1"
                 class="infopanel"
                 position="-13.6 1.4 1.75"
@@ -324,7 +341,7 @@
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-5; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-5; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel5"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>></a-box>
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"></a-box>
             <a-entity
                 id="CordisPanel-5"
                 class="infopanel"
@@ -457,68 +474,40 @@
         </a-entity>
         </a-scene>
 
-        <!-- Função Contrala animação dos emblemas JavaScript ---------------------------------------------->
-        <script>
-            /* Painel 01 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel1", function () {
-                this.setAttribute("animation-mixer", "clip: Cena1; startAt: 100;");
-            });
-            /* Painel 02 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel2", function () {
-                this.setAttribute("animation-mixer", "clip: Cena2; startAt: 100;");
-            });
-            /* Painel 03 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel3", function () {
-                this.setAttribute("animation-mixer", "clip: Cena3; startAt: 100;");
-            });
-            /* Painel 04 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel4", function () {
-                this.setAttribute("animation-mixer", "clip: Cena4; startAt: 100;");
-            });
-            /* Painel 05 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel5", function () {
-                this.setAttribute("animation-mixer", "clip: Cena5; startAt: 100;");
-            });
-            /* Painel 06 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel6", function () {
-                this.setAttribute("animation-mixer", "clip: Cena6; startAt: 100;");
-            });
-            /* Painel 07 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel7", function () {
-                this.setAttribute("animation-mixer", "clip: Cena7; startAt: 100;");
-            });
-            /* Painel 08 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel8", function () {
-                this.setAttribute("animation-mixer", "clip: Cena8; startAt: 100;");
-            });
-            /* Painel 09 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel9", function () {
-                this.setAttribute("animation-mixer", "clip: Cena9; startAt: 100;");
-            });
-            /* Painel 10 */
-            document.querySelector("#PalcoEmblema_1").addEventListener("hitPainel10", function () {
-                this.setAttribute("animation-mixer", "clip: Cena10; startAt: 100;");
-            });
-        </script>
-
 <!-- Função Contrala animação dos emblemas Retornando á Cen0 JavaScript ---------------------------------------------->
 <script>
     AFRAME.registerComponent('scene-controller', {
         init: function () {
             var el = this.el;
-            
+            var currentSound = null;
+    
+            function playSound(sceneNumber) {
+                if (currentSound) {
+                    currentSound.components.sound.stopSound();
+                }
+                currentSound = document.querySelector('#sound' + sceneNumber);
+                if (currentSound && currentSound.components.sound) {
+                    console.log('Playing sound for scene:', sceneNumber);
+                    currentSound.components.sound.playSound();
+                } else {
+                    console.warn('Sound component not found for scene:', sceneNumber);
+                }
+            }
             // Configurar listeners para cada painel
             for (var i = 1; i <= 10; i++) {
                 (function(sceneNumber) {
                     el.addEventListener('hitPainel' + sceneNumber, function () {
+                        console.log('Entering scene:', sceneNumber);
                         el.setAttribute('animation-mixer', 'clip: Cena' + sceneNumber + '; startAt: 100;');
+                        playSound(sceneNumber);
                     });
                 })(i);
             }
-            
             // Listener genérico para sair de qualquer painel
             el.addEventListener('exitPainel', function () {
+                console.log('Exiting to scene 0');
                 el.setAttribute('animation-mixer', 'clip: Cena0; startAt: 0;');
+                playSound(0);
             });
         }
     });
