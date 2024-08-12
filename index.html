@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
     <script
@@ -25,6 +25,54 @@
     <script src="https://unpkg.com/aframe-proxemic-component@0.0.21/dist/aframe-proxemic-component.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- Botões do palco  -->
+    <style>
+        .button-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #45a049;
+        }
+
+        #legend-container {
+            margin: 0 20px;
+            width: 200px;
+            height: 140px;
+            /* Ajuste conforme necessário */
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #legend-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -54,6 +102,7 @@
 
             <!--imagems dos paineis informativo -->
             <img id="infopanel" crossorign="anonymous" src="./assets/PainelNFO.png" />
+            <img id="iPainelLegenda00" crossorign="anonymous" src="./assets/PaineisInfo/Painel00Legenda.png" />
             <img id="iPainelLegenda01" crossorign="anonymous" src="./assets/PaineisInfo/Painel01Legenda.png" />
             <img id="iPainelLegenda02" crossorign="anonymous" src="./assets/PaineisInfo/Painel02Legenda.png" />
             <img id="iPainelLegenda03" crossorign="anonymous" src="./assets/PaineisInfo/Painel03Legenda.png" />
@@ -105,12 +154,31 @@
                 <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" id="LeftControl">
+                <!-- Mini palco -->
                 <a-entity id="PalcoEmblemaPortable" rotation="0 0 0" class="clickable" gltf-model="#PalcoEmblema"
                     scale="0.01 0.01 0.01" shadow="cast: false" position="0 .05 0"
                     animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
                     animation-mixer="clip: Cena0"></a-entity>
+                <!-- Botões de navegação -->
+                <a-entity id="nav-buttons" position="0 0.1 0.05">
+                    <a-entity id="prev-button" class="nav-button"
+                        geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
+                        position="-0.025 0 0" text="value: <; align: center; width: 0.1"
+                        onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
+                    <a-entity id="next-button" class="nav-button"
+                        geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
+                        position="0.025 0 0" text="value: >; align: center; width: 0.1"
+                        onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity>
+                </a-entity>
+                <!-- Legenda 3D Controlador -->
+                <a-entity id="LegendaImage3D" look-at="[camera]" position=" 0.15 0 0" rotation="-35 0 0"
+                    scale="1 1 1">
+                    <a-plane id="legend-plane" src="#iPainelLegenda00" width="0.2" height="0.1" transparent="true"
+                        side="double"></a-plane>
+                </a-entity>
             </a-entity>
         </a-entity>
+
 
         <!-- Base de movimento Limites -->
         <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="false" nav-mesh></a-entity>
@@ -154,8 +222,7 @@
         <!-- JArdim CMBB 3D -->
         <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
 
-        <!-- Palco e Emblema 3D ------------------------------------------->
-
+        <!-- Palco e Emblema 3D ---------------------------------------------------->
         <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" class="clickable" gltf-model="#PalcoEmblema"
             scale="0.2 0.2 0.2" shadow="cast: false" position="-6.586 1.2 -15.314"
             animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena0"></a-entity>
@@ -392,13 +459,53 @@
         </a-entity>
     </a-scene>
 
-    <!-- Função Contrala animação dos emblemas Retornando á Cen0 e atribui o audio ---------------------------------------------->
+    <div class="button-container">
+        <button class="nav-button">Anterior</button>
+        <div id="legend-container">
+            <img id="legend-image" src="./assets/PaineisInfo/Painel00Legenda.png" alt="Legenda da cena">
+        </div>
+        <button class="nav-button">Próxima</button>
+    </div>
+
+
+    <!-- JavaScipts --------------------------------------------------------------------------------------------------->
+
+    <!-- Função Contrala animação dos emblemas Retornando á Cen0 e atribui o audio e legendas--->
     <script>
         AFRAME.registerComponent('scene-controller', {
             init: function () {
                 var el = this.el;
                 var currentSound = null;
-                // Configurar listeners para cada painel e respetivo audio   
+                var currentSceneIndex = 0;
+
+                // Função para atualizar a legenda
+                function updateLegend(sceneNumber) {
+                    const legendNumber = sceneNumber.toString().padStart(2, '0');
+                    const legendImageSrc = `./assets/PaineisInfo/Painel${legendNumber}Legenda.png`;
+
+                    // Atualiza a imagem de legenda 2D
+                    const legendImage = document.getElementById('legend-image');
+                    if (legendImage) {
+                        legendImage.src = legendImageSrc;
+                        legendImage.alt = `Legenda da cena ${sceneNumber}`;
+                    }
+
+                    // Atualiza a imagem de legenda 3D (se aplicável)
+                    const legendaImage3D = document.getElementById('LegendaImage3D');
+                    if (legendaImage3D) {
+                        legendaImage3D.setAttribute('src', legendImageSrc);
+                    }
+
+                    // Atualiza a imagem de legenda 3D
+                    const legendPlane = document.getElementById('legend-plane');
+                    if (legendPlane) {
+                        legendPlane.setAttribute('src', legendImageSrc);
+                    }
+
+                    console.log(`Atualizando legenda para cena ${sceneNumber}: ${legendImageSrc}`);
+                }
+
+                // Função para tocar o som
                 function playSound(sceneNumber) {
                     if (currentSound) {
                         currentSound.components.sound.stopSound();
@@ -411,6 +518,7 @@
                         console.warn('Sound component not found for scene:', sceneNumber);
                     }
                 }
+
                 // Configurar listeners para cada painel
                 for (var i = 1; i <= 10; i++) {
                     (function (sceneNumber) {
@@ -418,21 +526,45 @@
                             console.log('Entering scene:', sceneNumber);
                             el.setAttribute('animation-mixer', 'clip: Cena' + sceneNumber + '; startAt: 100;');
                             playSound(sceneNumber);
+                            updateLegend(sceneNumber);
+                            currentSceneIndex = sceneNumber;
                         });
                     })(i);
                 }
+
                 // Listener genérico para sair de qualquer painel
                 el.addEventListener('exitPainel', function () {
                     console.log('Exiting to scene 0');
                     el.setAttribute('animation-mixer', 'clip: Cena0; startAt: 0;');
                     playSound(0);
+                    updateLegend(0);
+                    currentSceneIndex = 0;
                 });
+
+                // Adicionar funções para navegação manual (botões)
+                this.changeScene = function (direction) {
+                    if (direction === 'next') {
+                        currentSceneIndex = (currentSceneIndex + 1) % 11; // 11 porque temos cenas de 0 a 10
+                    } else if (direction === 'prev') {
+                        currentSceneIndex = (currentSceneIndex - 1 + 11) % 11;
+                    }
+                    el.setAttribute('animation-mixer', `clip: Cena${currentSceneIndex}; startAt: 100;`);
+                    playSound(currentSceneIndex);
+                    updateLegend(currentSceneIndex);
+                };
+
+                // Adicionar event listeners para os botões de navegação
+                const prevButton = document.querySelector('.nav-button:first-child');
+                const nextButton = document.querySelector('.nav-button:last-child');
+                if (prevButton && nextButton) {
+                    prevButton.addEventListener('click', () => this.changeScene('prev'));
+                    nextButton.addEventListener('click', () => this.changeScene('next'));
+                }
             }
         });
 
-        // Adicionar o componente ao elemento PalcoEmblema_1
+        // Adicionar o componente aos elementos
         document.querySelector('#PalcoEmblema_1').setAttribute('scene-controller', '');
-        // Adicionar o componente ao elemento PalcoEmblemaPortable
         document.querySelector('#PalcoEmblemaPortable').setAttribute('scene-controller', '');
     </script>
 
