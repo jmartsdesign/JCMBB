@@ -482,6 +482,7 @@
         </a-entity>
     </a-scene>
 
+    <!-- Menu de botões manual web--->
     <div class="button-container">
         <button class="nav-button">Anterior</button>
         <div id="legend-container">
@@ -587,8 +588,10 @@
         });
 
         // Adicionar o componente aos elementos
-        document.querySelector('#PalcoEmblema_1').setAttribute('scene-controller', '');
-        document.querySelector('#PalcoEmblemaPortable').setAttribute('scene-controller', '');
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('#PalcoEmblema_1').setAttribute('scene-controller', '');
+            document.querySelector('#PalcoEmblemaPortable').setAttribute('scene-controller', '');
+        });
     </script>
 
     <!-- Função torna invisivel exteriormente a entrada ---------------------------------------------->
