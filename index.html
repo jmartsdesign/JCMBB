@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
     <script
@@ -120,8 +120,8 @@
 
             <img id="PortaoEntrada" src="./assets/portao.png" />
 
-            <!--imagem cenários 360 -->
-            <img id="EntradaCMBB360" crossorigin="anonymous" src="./assets/Entrada_CMBB360-01.jpg" />
+            <!--imagem cenários 360 
+            <img id="EntradaCMBB360" crossorigin="anonymous" src="./assets/Entrada_CMBB360-01.jpg" /> ----->
             <img id="SkyJardimCMBB" crossorigin="anonymous" src="./assets/sky.jpg" />
 
             <!--imagems dos paineis informativo -->
@@ -179,7 +179,7 @@
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" id="LeftControl">
                 <!-- Mini palco -->
-                <a-entity id="PalcoEmblemaPortable" rotation="0 0 0" class="clickable" gltf-model="#PalcoEmblema"
+                <a-entity id="PalcoEmblemaPortable" rotation="0 0.05 0" gltf-model="#PalcoEmblema"
                     scale="0.01 0.01 0.01" shadow="cast: false" position="0 .05 0"
                     animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
                     animation-mixer="clip: Cena0"></a-entity>
@@ -195,7 +195,7 @@
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity>
                 </a-entity>
                 <!-- Legenda 3D Controlador -->
-                <a-entity id="LegendaImage3D" look-at="[camera]" position=" 0.15 0 0" rotation="-35 0 0" scale="1 1 1">
+                <a-entity id="LegendaImage3D" look-at="[camera]" position=" 0.15 0.05 0" rotation="-35 0 0" scale="1 1 1">
                     <a-plane id="legend-plane" src="#iPainelLegenda00" width="0.2" height="0.1" transparent="true"
                         side="double"></a-plane>
                 </a-entity>
@@ -246,34 +246,34 @@
         <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
 
         <!-- Palco e Emblema 3D ---------------------------------------------------->
-        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" class="clickable" gltf-model="#PalcoEmblema"
+        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" gltf-model="#PalcoEmblema"
             scale="0.2 0.2 0.2" shadow="cast: false" position="-6.586 1.2 -15.314"
             animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena0"></a-entity>
 
         <!-- Adiciona o elementos áudio à cena -->
         <a-entity id="AudiosPaineis" position="-6.586 1.2 -15.314">
             <a-entity id="sound0"
-                sound="src: #SoundP0; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP0; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound1"
-                sound="src: #SoundP1; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP1; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound2"
-                sound="src: #SoundP2; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP2; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound3"
-                sound="src: #SoundP3; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP3; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound4"
-                sound="src: #SoundP4; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP4; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound5"
-                sound="src: #SoundP5; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP5; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound6"
-                sound="src: #SoundP6; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP6; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound7"
-                sound="src: #SoundP7; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP7; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound8"
-                sound="src: #SoundP8; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP8; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound9"
-                sound="src: #SoundP9; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP9; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
             <a-entity id="sound10"
-                sound="src: #SoundP10; volume: 70; refDistance: 45; rolloffFactor: 10; autoplay: false"></a-entity>
+                sound="src: #SoundP10; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
         </a-entity>
 
         <!-- JardimCMBB PAINEIS -------------------------------->
