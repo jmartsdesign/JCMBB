@@ -170,7 +170,7 @@
         <!-- Camera e PLAYER -------------------------------------------------------------------------------------->
         <a-entity id="player" position="-15 0 15" rotation="0 -40 0"
             movement-controls="speed: 0.1; constrainToNavMesh: true"
-            sound="src: #SoundAmbi; volume: 1; autoplay: true; loop: true">
+            sound="src: #SoundAmbi; volume: 1; autoplay: true; loop: true" panel-visibility-controller>
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
@@ -179,9 +179,9 @@
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" id="LeftControl">
                 <!-- Mini palco -->
-                <a-entity id="PalcoEmblemaPortable" rotation="-45+ 0 0" gltf-model="#PalcoEmblema"
-                    scale="0.01 0.01 0.01" shadow="cast: false" position="0 .05 0"
-
+                <a-entity id="PalcoEmblemaPortable" rotation="0 0 0" gltf-model="#PalcoEmblema" scale="0.02 0.02 0.02"
+                    shadow="cast: false" position="0 .05 0"
+                    animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
                     animation-mixer="clip: Cena0"></a-entity>
                 <!-- Botões de navegação -->
                 <a-entity id="nav-buttons" position="0 0.1 0.05">
@@ -195,12 +195,15 @@
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity>
                 </a-entity>
                 <!-- Legenda 3D Controlador -->
-                <a-entity id="LegendaImage3D" look-at="[camera]" position=" 0.15 0.05 0" rotation="-35 0 0" scale="1 1 1">
+                <a-entity id="LegendaImage3D" look-at="[camera]" position=" 0.15 0.05 0" rotation="-35 0 0"
+                    scale="1 1 1">
                     <a-plane id="legend-plane" src="#iPainelLegenda00" width="0.2" height="0.1" transparent="true"
                         side="double"></a-plane>
                 </a-entity>
             </a-entity>
         </a-entity>
+
+
 
 
         <!-- Base de movimento Limites -->
@@ -246,8 +249,8 @@
         <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
 
         <!-- Palco e Emblema 3D ---------------------------------------------------->
-        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" gltf-model="#PalcoEmblema"
-            scale="0.2 0.2 0.2" shadow="cast: false" position="-6.586 1.2 -15.314"
+        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" gltf-model="#PalcoEmblema" scale="0.2 0.2 0.2"
+            shadow="cast: false" position="-6.586 1.2 -15.314"
             animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena0"></a-entity>
 
         <!-- Adiciona o elementos áudio à cena -->
@@ -289,7 +292,9 @@
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"
                 proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel1"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__portablestartcontrol="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainelPortable"
+                proxy-event__portableexitcontrol="event: hitend; to: #PalcoEmblemaPortable; as: exitPainelPortable"></a-box>
             <!-- Mostra o Painel Azulejo -->
             <a-entity id="CordisPanel-1" class="infopanel" position="-13.6 1.4 1.75" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
@@ -299,6 +304,7 @@
                 <a-image src="#iPainelLegenda01" height="0.7" width="1"></a-image>
             </a-entity>
         </a-entity>
+
         <!-- Painel 02 -->
         <a-entity id="SceneController">
             <a-box width="2" height="2" depth="1.5" position="-12 1.4 -0.35" color="red"
@@ -310,7 +316,10 @@
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel2"
                 proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel2"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__portablestartcontrol="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainelPortable"
+                proxy-event__portableexitcontrol="event: hitend; to: #PalcoEmblemaPortable; as: exitPainelPortable"></a-box>
+            <!-- Mostra o Painel Azulejo -->
             <a-entity id="CordisPanel-2" class="infopanel" position="-13.6 1.4 -0.35" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-2" height="2" width="2"></a-image>
             </a-entity>
@@ -594,7 +603,40 @@
         });
     </script>
 
-    <!-- Função torna invisivel exteriormente a entrada ---------------------------------------------->
+    <!-- Função Contrala Palco Visibilidade Controlador--->
+    <script>
+        AFRAME.registerComponent('panel-visibility-controller', {
+            init: function () {
+                this.palcoEmblemaPortable = document.querySelector('#PalcoEmblemaPortable');
+                this.isInPanel = false;
+
+                // Adicione um evento para detectar quando o usuário entra ou sai dos painéis
+                this.el.addEventListener('hitPainelPortable', this.enterPanel.bind(this));
+                this.el.addEventListener('exitPainelPortable', this.exitPanel.bind(this));
+
+                // Inicialmente, esconda o PalcoEmblemaPortable
+                this.palcoEmblemaPortable.setAttribute('visible', true);
+            },
+
+            enterPanel: function () {
+                this.isInPanel = true;
+                this.updateVisibility();
+            },
+
+            exitPanel: function () {
+                this.isInPanel = false;
+                this.updateVisibility();
+            },
+
+            updateVisibility: function () {
+                this.palcoEmblemaPortable.setAttribute('visible', this.isInPanel);
+            }
+        });
+    </script>
+
+
+
+    <!-- Função torna invisivel a esfera 360 exteriormente da entrada ---------------------------------------------->
     <script>
         AFRAME.registerComponent("cloak", {
             schema: { type: "selectorAll" },
