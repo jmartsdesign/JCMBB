@@ -170,41 +170,42 @@
         <!-- Camera e PLAYER -------------------------------------------------------------------------------------->
         <a-entity id="player" position="-15 0 15" rotation="0 -40 0"
             movement-controls="speed: 0.1; constrainToNavMesh: true"
-            sound="src: #SoundAmbi; volume: 1; autoplay: true; loop: true" panel-visibility-controller>
+            sound="src: #SoundAmbi; volume: 0.65; autoplay: true; loop: true" panel-visibility-controller>
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
             <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
+                <a-sphere id="RightControlSphere" color="blue" geometry="radius: 0.01"
+                    position="-0.00499 -0.02196 -0.05457"></a-sphere>
                 <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" id="LeftControl">
                 <!-- Mini palco -->
-                <a-entity id="PalcoEmblemaPortable" rotation="0 0 0" gltf-model="#PalcoEmblema" scale="0.02 0.02 0.02"
-                    shadow="cast: false" position="0 .05 0"
-                    animation="property: rotation; to: 0 360 0; dur: 5500; loop: true"
+                <a-entity id="PalcoEmblemaPortable" rotation="-38 0 0" gltf-model="#PalcoEmblema"
+                    scale="0.015 0.015 0.015" shadow="cast: false" position="0.01347 0.07 -0.04938"
                     animation-mixer="clip: Cena0"></a-entity>
                 <!-- Botões de navegação -->
-                <a-entity id="nav-buttons" position="0 0.1 0.05">
-                    <a-entity id="prev-button" class="nav-button"
+                <a-entity id="nav-buttons" position="0.00732 0.14714 0.07596"
+                    rotation="-61.35060182922316 -18.013793078913082 18.661235387410912">
+                    <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
+                        event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
                         geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
                         position="-0.025 0 0" text="value: <; align: center; width: 0.1"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
-                    <a-entity id="next-button" class="nav-button"
+                    <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
+                        event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
                         geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
                         position="0.025 0 0" text="value: >; align: center; width: 0.1"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity>
                 </a-entity>
                 <!-- Legenda 3D Controlador -->
-                <a-entity id="LegendaImage3D" look-at="[camera]" position=" 0.15 0.05 0" rotation="-35 0 0"
-                    scale="1 1 1">
+                <a-entity id="LegendaImage3D" look-at="[camera]" position="0.01347 0.1 -0.04938" rotation="-35 0 0"
+                    scale="1.2 1.2 1.2">
                     <a-plane id="legend-plane" src="#iPainelLegenda00" width="0.2" height="0.1" transparent="true"
                         side="double"></a-plane>
                 </a-entity>
             </a-entity>
         </a-entity>
-
-
-
 
         <!-- Base de movimento Limites -->
         <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="false" nav-mesh></a-entity>
@@ -249,34 +250,41 @@
         <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
 
         <!-- Palco e Emblema 3D ---------------------------------------------------->
-        <a-entity id="PalcoEmblema_1" rotation="0 332.255 0" gltf-model="#PalcoEmblema" scale="0.2 0.2 0.2"
-            shadow="cast: false" position="-6.586 1.2 -15.314"
-            animation="property: rotation; to: 0 360 0; dur: 5500; loop: true" animation-mixer="clip: Cena0"></a-entity>
+        <a-entity id="PalcoEmblema_1">
+            <a-box width="6" height="6" depth="6" position="-6.586 1.2 -15.314" color="red"
+                aabb-collider="objects: #cabeca; debug: true" visible="false"
+                event-set__enter="_event: hitstart; _target: #player; _emit: hitstart"
+                event-set__exit="_event: hitend; _target: #player; _emit: hitend"></a-box>
+            <a-entity id="PalcoEmblema3D" rotation="0 0 0" gltf-model="#PalcoEmblema" scale="0.2 0.2 0.2"
+                shadow="cast: false" position="-6.586 1.2 -15.314"
+                animation="property: rotation; to: 0 360 0; dur: 9500; loop: true" animation-mixer="clip: Cena0">
+            </a-entity>
+        </a-entity>
 
         <!-- Adiciona o elementos áudio à cena -->
         <a-entity id="AudiosPaineis" position="-6.586 1.2 -15.314">
             <a-entity id="sound0"
-                sound="src: #SoundP0; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP0; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound1"
-                sound="src: #SoundP1; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP1; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound2"
-                sound="src: #SoundP2; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP2; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound3"
-                sound="src: #SoundP3; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP3; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound4"
-                sound="src: #SoundP4; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP4; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound5"
-                sound="src: #SoundP5; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP5; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound6"
-                sound="src: #SoundP6; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP6; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound7"
-                sound="src: #SoundP7; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP7; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound8"
-                sound="src: #SoundP8; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP8; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound9"
-                sound="src: #SoundP9; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP9; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
             <a-entity id="sound10"
-                sound="src: #SoundP10; volume: 5; refDistance: 45; rolloffFactor: 1; autoplay: false"></a-entity>
+                sound="src: #SoundP10; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
         </a-entity>
 
         <!-- JardimCMBB PAINEIS -------------------------------->
@@ -289,12 +297,13 @@
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-1; visible:false"
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda01; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda01; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel1"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel1"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPainel"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel1"
                 proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__portablestartcontrol="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainelPortable"
-                proxy-event__portableexitcontrol="event: hitend; to: #PalcoEmblemaPortable; as: exitPainelPortable"></a-box>
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable1"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable1">
+            </a-box>
             <!-- Mostra o Painel Azulejo -->
             <a-entity id="CordisPanel-1" class="infopanel" position="-13.6 1.4 1.75" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
@@ -304,21 +313,21 @@
                 <a-image src="#iPainelLegenda01" height="0.7" width="1"></a-image>
             </a-entity>
         </a-entity>
-
         <!-- Painel 02 -->
         <a-entity id="SceneController">
             <a-box width="2" height="2" depth="1.5" position="-12 1.4 -0.35" color="red"
-                aabb-collider="objects: #cabeca;" visible="false"
+                aabb-collider="objects: #cabeca; " visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-2; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-2; visible:false"
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda02; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda02; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel2"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel2"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine2"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel2"
                 proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__portablestartcontrol="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainelPortable"
-                proxy-event__portableexitcontrol="event: hitend; to: #PalcoEmblemaPortable; as: exitPainelPortable"></a-box>
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable2"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable2">
+            </a-box>
             <!-- Mostra o Painel Azulejo -->
             <a-entity id="CordisPanel-2" class="infopanel" position="-13.6 1.4 -0.35" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-2" height="2" width="2"></a-image>
@@ -339,7 +348,10 @@
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel3"
                 proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel3"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable3"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable3">
+            </a-box>
             <a-entity id="CordisPanel-3" class="infopanel" position="-13.6 1.4 -2.4" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-3" height="2" width="2"></a-image>
             </a-entity>
@@ -357,9 +369,12 @@
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda04; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda04; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel4"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine4"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel4"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable4"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable4">
+            </a-box>
             <a-entity id="CordisPanel-4" class="infopanel" position="-13.6 1.4 -4.4" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-4" height="2" width="2"></a-image>
             </a-entity>
@@ -377,9 +392,12 @@
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda05; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda05; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel5"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine5"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel5"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable5"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable5">
+            </a-box>
             <a-entity id="CordisPanel-5" class="infopanel" position="-13.6 1.4 -6.4" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-5" height="2" width="2"></a-image>
             </a-entity>
@@ -397,9 +415,12 @@
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda06; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda06; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel6"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine6"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel6"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable6"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable6">
+            </a-box>
             <a-entity id="CordisPanel-6" class="infopanel" position="-13.6 1.4 -11.7" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-6" height="2" width="2"></a-image>
             </a-entity>
@@ -417,9 +438,12 @@
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda07; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda07; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel7"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine7"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel7"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable7"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable7">
+            </a-box>
             <a-entity id="CordisPanel-7" class="infopanel" position="-13.6 1.4 -13.7" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-7" height="2" width="2"></a-image>
             </a-entity>
@@ -437,9 +461,12 @@
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda08; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda08; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel8"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine8"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel8"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable8"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable8">
+            </a-box>
             <a-entity id="CordisPanel-8" class="infopanel" position="-13.6 1.4 -15.7" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-8" height="2" width="2"></a-image>
             </a-entity>
@@ -457,9 +484,12 @@
                 event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda09; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda09; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel9"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine9"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel9"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable9"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable9">
+            </a-box>
             <a-entity id="CordisPanel-9" class="infopanel" position="-13.6 1.4 -17.7" visible="false" rotation="0 90 0">
                 <a-image src="#PainelCordis-9" height="2" width="2"></a-image>
             </a-entity>
@@ -474,12 +504,15 @@
                 aabb-collider="objects: #cabeca; " visible="false"
                 event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-10; visible:true"
                 event-set__coliliderend="_event: hitend; _target:#CordisPanel-10; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda10; visible:true"
+                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda09; visible:true"
                 event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda10; visible:false"
                 proxy-event="event: hitstart; to: #PalcoEmblema_1; as: hitPainel10"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPainel"
+                proxy-event__exit="event: hitend; to: #PalcoEmblema_1; as: exitPaine10"
                 proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel10"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"></a-box>
+                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable10"
+                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable10">
+            </a-box>
             <a-entity id="CordisPanel-10" class="infopanel" position="-13.6 1.4 -19.5" visible="false"
                 rotation="0 90 0">
                 <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
@@ -593,6 +626,13 @@
                     prevButton.addEventListener('click', () => this.changeScene('prev'));
                     nextButton.addEventListener('click', () => this.changeScene('next'));
                 }
+
+
+                // para intersecçao com o controlador
+                if (prevButton && nextButton) {
+                    prevButton.addEventListener('hitstart', () => this.changeScene('prev'));
+                    nextButton.addEventListener('histart', () => this.changeScene('next'));
+                }
             }
         });
 
@@ -608,33 +648,73 @@
         AFRAME.registerComponent('panel-visibility-controller', {
             init: function () {
                 this.palcoEmblemaPortable = document.querySelector('#PalcoEmblemaPortable');
-                this.isInPanel = false;
+                this.legendaImage3D = document.querySelector('#LegendaImage3D');
+                this.isNearPanel = false;
+                this.isNearPalcoEmblema = false;
+                this.currentPanelNumber = 0;
 
-                // Adicione um evento para detectar quando o usuário entra ou sai dos painéis
-                this.el.addEventListener('hitPainelPortable', this.enterPanel.bind(this));
-                this.el.addEventListener('exitPainelPortable', this.exitPanel.bind(this));
+                // Inicialmente, esconda o PalcoEmblemaPortable e a legenda
+                this.palcoEmblemaPortable.setAttribute('visible', false);
+                this.legendaImage3D.setAttribute('visible', false);
 
-                // Inicialmente, esconda o PalcoEmblemaPortable
-                this.palcoEmblemaPortable.setAttribute('visible', true);
+                // Eventos para os painéis
+                for (let i = 1; i <= 10; i++) {
+                    this.el.addEventListener(`hitPainelPortable${i}`, () => this.enterPanel(i));
+                    this.el.addEventListener(`exitPainelPortable${i}`, this.exitPanel.bind(this));
+                }
+
+                // Eventos para o PalcoEmblema_1
+                const palcoEmblema1 = document.querySelector('#PalcoEmblema_1');
+                palcoEmblema1.addEventListener('hitstart', this.enterPalcoEmblema.bind(this));
+                palcoEmblema1.addEventListener('hitend', this.exitPalcoEmblema.bind(this));
             },
 
-            enterPanel: function () {
-                this.isInPanel = true;
+            enterPanel: function (panelNumber) {
+                this.isNearPanel = true;
+                this.currentPanelNumber = panelNumber;
                 this.updateVisibility();
             },
 
             exitPanel: function () {
-                this.isInPanel = false;
+                this.isNearPanel = false;
+                this.currentPanelNumber = 0;
+                this.updateVisibility();
+            },
+
+            enterPalcoEmblema: function () {
+                this.isNearPalcoEmblema = true;
+                this.updateVisibility();
+            },
+
+            exitPalcoEmblema: function () {
+                this.isNearPalcoEmblema = false;
                 this.updateVisibility();
             },
 
             updateVisibility: function () {
-                this.palcoEmblemaPortable.setAttribute('visible', this.isInPanel);
+                // Mostrar palco quando perto de um painel, esconder a legenda
+                if (this.isNearPanel) {
+                    this.palcoEmblemaPortable.setAttribute('visible', true);
+                    this.legendaImage3D.setAttribute('visible', false);
+                }
+                // Mostrar legenda quando perto do PalcoEmblema_1, esconder o palco
+                else if (this.isNearPalcoEmblema) {
+                    this.palcoEmblemaPortable.setAttribute('visible', false);
+                    this.legendaImage3D.setAttribute('visible', true);
+                    // Usar a legenda correspondente ao último painel visitado
+                    const legendaSrc = this.currentPanelNumber > 0 ?
+                        `#iPainelLegenda${this.currentPanelNumber.toString().padStart(2, '0')}` :
+                        '#iPainelLegenda00';
+                    this.legendaImage3D.querySelector('#legend-plane').setAttribute('src', legendaSrc);
+                }
+                // Esconder ambos quando não estiver perto de nenhum
+                else {
+                    this.palcoEmblemaPortable.setAttribute('visible', false);
+                    this.legendaImage3D.setAttribute('visible', false);
+                }
             }
         });
     </script>
-
-
 
     <!-- Função torna invisivel a esfera 360 exteriormente da entrada ---------------------------------------------->
     <script>
