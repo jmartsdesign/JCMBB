@@ -206,7 +206,12 @@
                     rotation="-61.35060182922316 -18.013793078913082 18.661235387410912">
                     <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
+<<<<<<< HEAD
+                        geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
+                        gltf-model="#Heart"
+=======
                         gltf-model="#Heart" material="color: #4CAF50" 
+>>>>>>> 413653da64ca49f06b244df8d6c4d2cdfc20bcb7
                         position="-0.020 0 0" scale="0.015 0.015 0.015" text="value: <; align: center; width: 0.1"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
                    <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
