@@ -191,10 +191,9 @@
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
             <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0"> 
-                <a-sphere id="RightControlSphere" color="blue" geometry="radius: 0.05" visible="false"
+                <a-sphere id="RightControlSphere" color="blue" geometry="radius: 0.05" visible="true"
                     position="-0.00499 -0.02196 -0.05457"></a-sphere>
-                    <a-entity gltf-model="#seta" scale="0.2 0.2 0.2" position="-0.00499 -0.02196 -0.05457"></a-entity>
-                <!--<a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>-->
+                <a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" id="LeftControl">
                 <!-- Mini palco -->
@@ -202,6 +201,13 @@
                     scale="0.015 0.015 0.015" shadow="cast: false" position="0.01347 0.07 -0.04938"
                     animation-mixer="clip: Cena0"></a-entity>
                 <!-- Botões de navegação -->
+                <a-entity id="nav-buttons" position="0.00732 0.14714 0.07596" rotation="-61.35060182922316 -18.013793078913082 18.661235387410912">
+                    <a-entity id="prev-button" class="nav-button"
+                              aabb-collider="objects: #RightControlSphere; "
+                              event-set__hitstart="material.opacity:0.5"
+                              event-set__hitend="material.opacity:1"
+                        geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
+                        position="-0.025 0 0" text="value: <; align: center; width: 0.1"
                 <a-entity id="nav-buttons" position="0.00732 0.14714 0.07596"
                     rotation="-61.35060182922316 -18.013793078913082 18.661235387410912">
                     <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
@@ -209,11 +215,13 @@
                         geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
                         position="-0.025 0 0" text="value: <; align: center; width: 0.1"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
-                   <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
-                        event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
+                    <a-entity id="next-button" class="nav-button"
+                              aabb-collider="objects: #RightControlSphere; "
+                              event-set__hitstart="material.opacity:0.5"
+                              event-set__hitend="material.opacity:1"
                         geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
                         position="0.025 0 0" text="value: >; align: center; width: 0.1"
-                        onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity> -->
+                        onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity>
                 </a-entity>
                 <!-- Legenda 3D Controlador -->
                 <a-entity id="LegendaImage3D" look-at="[camera]" position="0.01347 0.1 -0.04938" rotation="-35 0 0"
