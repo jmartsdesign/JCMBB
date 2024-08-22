@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
     <script
@@ -207,8 +207,7 @@
                     <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
                         geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
-                        gltf-model="#Heart"
-                        position="-0.020 0 0" scale="0.015 0.015 0.015" text="value: <; align: center; width: 0.1"
+                        position="-0.025 0 0" text="value: <; align: center; width: 0.1"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
                    <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
