@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="en">
-<!-- Codigo inicial gerado automaticamente by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter
-    MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE 
-    Modificado e adptado por Jorge Antunes-->
+
+<!-- Mestrado de Design e Multimédia, foi desenvolvida uma experiência imersiva de Realidade Virtual, 
+relativa à Arte Emblemática da Casa Museu Bissaya Barreto por Jorge Antunes 
+Codigo inicial gerado automaticamente by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter
+MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE 
+Modificado e adptado por Jorge Antunes-->
 
 <head>
     <title>Jardim CMBB</title>
@@ -11,7 +14,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
     <script
@@ -24,73 +27,8 @@
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxemic-component@0.0.21/dist/aframe-proxemic-component.min.js"></script>
 
+    <script src="./js/script.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
-
-    <!-- Botões do palco  -->
-    <style>
-        .button-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .nav-button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .nav-button:hover {
-            background-color: #45a049;
-        }
-
-        #legend-container {
-            margin: 0 20px;
-            width: 200px;
-            height: 140px;
-            /* Ajuste conforme necessário */
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #legend-image {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        /* CSS para crregar imagem no centro */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
-
-        #loading-screen img {
-            width: 640px;
-            height: 480px;
-        }
-    </style>
 
 </head>
 
@@ -190,8 +128,9 @@
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
                 <a-sphere id="cabeca" radius="0.1"></a-sphere>
             </a-entity>
-            <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0"> 
-                    <a-entity id="RightControlSphere" gltf-model="#seta" scale="0.2 0.2 0.2" position="-0.00499 -0.02196 -0.05457"></a-entity>
+            <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0">
+                <a-entity id="RightControlSphere" gltf-model="#seta" scale="0.2 0.2 0.2"
+                    position="-0.00499 -0.02196 -0.05457"></a-entity>
                 <!--<a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>-->
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" id="LeftControl">
@@ -204,10 +143,10 @@
                     rotation="-61.35060182922316 -18.013793078913082 18.661235387410912">
                     <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
-                        gltf-model="#Heart" material="color: #4CAF50" 
-                        position="0 -0.04 -0.03" scale="0.035 0.035 0.035" text="value: <; align: center; width: 0.1"
+                        gltf-model="#Heart" material="color: #4CAF50" position="0 -0.04 -0.03" scale="0.035 0.035 0.035"
+                        text="value: <; align: center; width: 0.1"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
-                   <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
+                    <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
                         geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
                         position="0.025 0 0" text="value: >; align: center; width: 0.1"
@@ -541,237 +480,18 @@
         </a-entity>
     </a-scene>
 
-    <!-- JavaScipts --------------------------------------------------------------------------------------------------->
-
-    <!-- Função Contrala animação dos emblemas Retornando á Cen0 e atribui o audio e legendas--->
     <script>
-        AFRAME.registerComponent('scene-controller', {
-            init: function () {
-                var el = this.el;
-                var currentSound = null;
-                var currentSceneIndex = 0;
-
-                // Função para atualizar a legenda
-                function updateLegend(sceneNumber) {
-                    const legendNumber = sceneNumber.toString().padStart(2, '0');
-                    const legendImageSrc = `./assets/PaineisInfo/Painel${legendNumber}Legenda.png`;
-
-                    // Atualiza a imagem de legenda 2D
-                    const legendImage = document.getElementById('legend-image');
-                    if (legendImage) {
-                        legendImage.src = legendImageSrc;
-                        legendImage.alt = `Legenda da cena ${sceneNumber}`;
-                    }
-
-                    // Atualiza a imagem de legenda 3D (se aplicável)
-                    const legendaImage3D = document.getElementById('LegendaImage3D');
-                    if (legendaImage3D) {
-                        legendaImage3D.setAttribute('src', legendImageSrc);
-                    }
-
-                    // Atualiza a imagem de legenda 3D
-                    const legendPlane = document.getElementById('legend-plane');
-                    if (legendPlane) {
-                        legendPlane.setAttribute('src', legendImageSrc);
-                    }
-
-                    console.log(`Atualizando legenda para cena ${sceneNumber}: ${legendImageSrc}`);
-                }
-
-                // Função para tocar o som
-                function playSound(sceneNumber) {
-                    if (currentSound) {
-                        currentSound.components.sound.stopSound();
-                    }
-                    currentSound = document.querySelector('#sound' + sceneNumber);
-                    if (currentSound && currentSound.components.sound) {
-                        console.log('Playing sound for scene:', sceneNumber);
-                        currentSound.components.sound.playSound();
-                    } else {
-                        console.warn('Sound component not found for scene:', sceneNumber);
-                    }
-                }
-
-                // Configurar listeners para cada painel
-                for (var i = 1; i <= 10; i++) {
-                    (function (sceneNumber) {
-                        el.addEventListener('hitPainel' + sceneNumber, function () {
-                            console.log('Entering scene:', sceneNumber);
-                            el.setAttribute('animation-mixer', 'clip: Cena' + sceneNumber + '; startAt: 100;');
-                            playSound(sceneNumber);
-                            updateLegend(sceneNumber);
-                            currentSceneIndex = sceneNumber;
-                        });
-                    })(i);
-                }
-
-                // Listener genérico para sair de qualquer painel
-                el.addEventListener('exitPainel', function () {
-                    console.log('Exiting to scene 0');
-                    el.setAttribute('animation-mixer', 'clip: Cena0; startAt: 0;');
-                    playSound(0);
-                    updateLegend(0);
-                    currentSceneIndex = 0;
-                });
-
-                // Adicionar funções para navegação manual (botões)
-                this.changeScene = function (direction) {
-                    if (direction === 'next') {
-                        currentSceneIndex = (currentSceneIndex + 1) % 11; // 11 porque temos cenas de 0 a 10
-                    } else if (direction === 'prev') {
-                        currentSceneIndex = (currentSceneIndex - 1 + 11) % 11;
-                    }
-                    el.setAttribute('animation-mixer', `clip: Cena${currentSceneIndex}; startAt: 100;`);
-                    playSound(currentSceneIndex);
-                    updateLegend(currentSceneIndex);
-                };
-
-                // Adicionar event listeners para os botões de navegação
-                const prevButton = document.querySelector('.nav-button:first-child');
-                const nextButton = document.querySelector('.nav-button:last-child');
-                if (prevButton && nextButton) {
-                    prevButton.addEventListener('click', () => this.changeScene('prev'));
-                    nextButton.addEventListener('click', () => this.changeScene('next'));
-                }
-
-
-                // para intersecçao com o controlador
-                if (prevButton && nextButton) {
-                    prevButton.addEventListener('hitstart', () => this.changeScene('prev'));
-                    nextButton.addEventListener('histart', () => this.changeScene('next'));
-                }
-            }
-        });
-
         // Adicionar o componente aos elementos
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('#PalcoEmblema3D').setAttribute('scene-controller', '');
             document.querySelector('#PalcoEmblemaPortable').setAttribute('scene-controller', '');
         });
-    </script>
 
-    <!-- Função Contrala Palco Visibilidade Controlador--->
-    <script>
-        AFRAME.registerComponent('panel-visibility-controller', {
-            init: function () {
-                this.palcoEmblemaPortable = document.querySelector('#PalcoEmblemaPortable');
-                this.legendaImage3D = document.querySelector('#LegendaImage3D');
-                this.isNearPanel = false;
-                this.isNearPalcoEmblema = false;
-                this.currentPanelNumber = 0;
-
-                // Inicialmente, esconda o PalcoEmblemaPortable e a legenda
-                this.palcoEmblemaPortable.setAttribute('visible', false);
-                this.legendaImage3D.setAttribute('visible', false);
-
-                // Eventos para os painéis
-                for (let i = 1; i <= 10; i++) {
-                    this.el.addEventListener(`hitPainelPortable${i}`, () => this.enterPanel(i));
-                    this.el.addEventListener(`exitPainelPortable${i}`, this.exitPanel.bind(this));
-                }
-
-                // Eventos para o PalcoEmblema_1
-                const palcoEmblema1 = document.querySelector('#PalcoEmblema_1');
-                palcoEmblema1.addEventListener('hitstart', this.enterPalcoEmblema.bind(this));
-                palcoEmblema1.addEventListener('hitend', this.exitPalcoEmblema.bind(this));
-            },
-
-            enterPanel: function (panelNumber) {
-                this.isNearPanel = true;
-                this.currentPanelNumber = panelNumber;
-                this.updateVisibility();
-            },
-
-            exitPanel: function () {
-                this.isNearPanel = false;
-                this.currentPanelNumber = 0;
-                this.updateVisibility();
-            },
-
-            enterPalcoEmblema: function () {
-                this.isNearPalcoEmblema = true;
-                this.updateVisibility();
-            },
-
-            exitPalcoEmblema: function () {
-                this.isNearPalcoEmblema = false;
-                this.updateVisibility();
-            },
-
-            updateVisibility: function () {
-                // Mostrar palco quando perto de um painel, esconder a legenda
-                if (this.isNearPanel) {
-                    this.palcoEmblemaPortable.setAttribute('visible', true);
-                    this.legendaImage3D.setAttribute('visible', false);
-                }
-                // Mostrar legenda quando perto do PalcoEmblema_1, esconder o palco
-                else if (this.isNearPalcoEmblema) {
-                    this.palcoEmblemaPortable.setAttribute('visible', false);
-                    this.legendaImage3D.setAttribute('visible', true);
-                    // Usar a legenda correspondente ao último painel visitado
-                    const legendaSrc = this.currentPanelNumber > 0 ?
-                        `#iPainelLegenda${this.currentPanelNumber.toString().padStart(2, '0')}` :
-                        '#iPainelLegenda00';
-                    this.legendaImage3D.querySelector('#legend-plane').setAttribute('src', legendaSrc);
-                }
-                // Esconder ambos quando não estiver perto de nenhum
-                else {
-                    this.palcoEmblemaPortable.setAttribute('visible', false);
-                    this.legendaImage3D.setAttribute('visible', false);
-                }
-            }
-        });
-    </script>
-
-    <!-- Função torna invisivel a esfera 360 exteriormente da entrada ---------------------------------------------->
-    <script>
-        AFRAME.registerComponent("cloak", {
-            schema: { type: "selectorAll" },
-            setRenderOrder: function (el, order) {
-                let mesh = el.getObject3D("mesh");
-                let _this = this;
-                if (!mesh) {
-                    el.addEventListener("model-loaded", function () {
-                        _this.setRenderOrder(el, order);
-                    });
-                    return;
-                }
-                console.log("setting render order on ", el, "to ", order);
-                mesh.renderOrder = order;
-            },
-            init: function () {
-                console.log("Setting cloak");
-                let cloak = this.el;
-
-                console.log("Cloak loaded");
-                let mesh = cloak.getObject3D("mesh"); // grab the mesh
-                if (mesh === undefined) {
-                    console.log("no mesh");
-                    return;
-                } // return if no mesh :(
-                mesh.traverse(function (node) {
-                    // traverse through and apply settings
-                    if (node.isMesh && node.material) {
-                        // make sure the element can be a cloak
-                        console.log(node);
-                        node.material.colorWrite = false;
-                        node.material.needsUpdate = true;
-                    }
-                });
-                mesh.renderOrder = 1;
-                console.log(cloak.children);
-                for (const child of this.data) {
-                    this.setRenderOrder(child, 11);
-                }
-            }
-        });
-    </script>
-
-    <!-- Função para esconder o loaded quando estiver a pagina estiver pronta para exebir -->
-    <script>
+        //-- Função para esconder o loaded quando estiver a pagina estiver pronta para exebir -->
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loading-screen').style.display = 'none';
         });
+
     </script>
 
 </body>
