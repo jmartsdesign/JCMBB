@@ -15,3 +15,5 @@ Live demo VR in https://jardimcmbb.netlify.app/
 Live demo AR in https://jcmbb-ar.netlify.app/
 
 <!-- <img src="https://github.com/user-attachments/assets/69da0f7d-3d77-45ff-be42-bb4c67623842" alt="JCMBB-VR" width="250" height="250"> -->
+---
+#### MDM/UC - Estágio/Dissertação - Experiência Imersiva de Realidade Virtual para Arte Emblemática na Casa Museu Bissaya Barreto - 2024
