@@ -1,9 +1,7 @@
-/* to display text in front of the aframe canvas*/
-/*
-a-scene{
-  z-index: -1;
-}
-*/
+/* Código CSS
+<-- Mestrado de Design e Multimédia, foi desenvolvida uma experiência imersiva de Realidade Virtual, 
+relativa à Arte Emblemática da Casa Museu Bissaya Barreto.
+por Jorge Antunes -->*/
 
 .controller {
     position: fixed;
@@ -25,3 +23,70 @@ a-scene{
     -moz-opacity: 0.5;
     opacity: 0.5;
 }
+
+/*-- Botões do palco  --*/
+
+    .button-container {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .nav-button:hover {
+        background-color: #45a049;
+    }
+
+    #legend-container {
+        margin: 0 20px;
+        width: 200px;
+        height: 140px;
+        /* Ajuste conforme necessário */
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #legend-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* CSS para crregar imagem no centro */
+    #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    #loading-screen img {
+        width: 640px;
+        height: 480px;
+    }
+
+/*-- Mestrado de Design e Multimédia --*/
