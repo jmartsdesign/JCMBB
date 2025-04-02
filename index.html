@@ -109,8 +109,9 @@
         <button class="nav-button">Próxima</button>
     </div>  --->
 
-    <a-scene webcentric renderer="physicallyCorrectLights: false" cursor="rayOrigin:mouse"
-        raycaster="objects: .clickable">
+    <a-scene webcentric renderer="physicallyCorrectLights: false" cursor="rayOrigin:xrselect"
+        raycaster="objects: .clickable"
+             xr-mode-ui="enabled: true; XRMode: xr">
         <!-- Disable inspector  
             <script>
                 var sceneEl = document.querySelector("a-scene");
@@ -184,7 +185,7 @@
         </a-link>
 
         <!-- Camera e PLAYER -------------------------------------------------------------------------------------->
-        <a-entity id="player" position="-15 0 15" rotation="0 -40 0"
+        <a-entity id="player" position="-8 0 -5" rotation="0 -40 0"
             movement-controls="speed: 0.1; constrainToNavMesh: true"
             sound="src: #SoundAmbi; volume: 0.65; autoplay: true; loop: true" panel-visibility-controller>
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
@@ -226,8 +227,8 @@
         <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="false" nav-mesh></a-entity>
 
         <!-- Sky e Entrada do Jardim -------------------->
-        <a-entity id="SkyPrincipal" position="0 0 0">
-            <a-sky src="#SkyJardimCMBB" geometry="radius: 100"></a-sky>
+        <a-entity id="SkyPrincipal" position="0 0 0" hide-on-enter-ar>
+            <a-sky src="#SkyJardimCMBB" geometry="radius: 100" hide-on-enter-ar></a-sky>
         </a-entity>
 
         <!-- Entrada exterior no Jardim da CMBB 360 ------------>
@@ -240,7 +241,7 @@
             animation__open="property: rotation; to: 0 45 0; dur: 1000; startEvents: proximityenter"
             animation__close="property: rotation; to: 0 -45 0; dur: 1000; startEvents: proximityexit">
             <a-plane src="#PortaoEntrada" width="1" height="2" depth="0.1" position="0.633 0 -0.062" transparent="true"
-                side:"double"></a-plane>
+                side="double"></a-plane>
         </a-entity>
 
         <!-- Painel de entrada exterior -->
