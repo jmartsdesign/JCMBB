@@ -6,14 +6,14 @@ import ssl
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 # Configuration
-ip = "192.168.50.133"
+ip = "192.168.1.214"
 port = 4443  # Default HTTPS port is 443, but we'll use 4443 for local development
 url = f"https://{ip}:{port}"
 server_address = (ip, port)
 
 # SSL certificate and key paths (adjust these paths based on where your certificate is stored)
-cert_file = 'server.crt'  # Path to the SSL certificate file
-key_file = 'server.key'   # Path to the SSL key file
+cert_file = './JCMBB/server.crt'  # Path to the SSL certificate file
+key_file = './JCMBB/server.key'   # Path to the SSL key file
 key_passphrase = b'jardim'  # Replace with the actual passphrase for the key
 
 # Create the HTTPServer instance

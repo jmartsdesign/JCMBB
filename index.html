@@ -7,23 +7,55 @@
 <head>
     <title>Jardim CMBB</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="manifest" crossorigin="use-credentials" href="manifest.webmanifest">
     <meta name="description" content="3D Application" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v7.4.0/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
-    <script
-        src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
-    <script
-        src="https://unpkg.com/aframe-fps-counter-component@1.0.1/dist/aframe-fps-counter-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-proxemic-component@0.0.21/dist/aframe-proxemic-component.min.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js', { scope: '/JCMBB/' })
+                .then((registration) => {
+                    const data = {
+                        type: 'CACHE_URLS',
+                        payload: [
+                            location.href,
+                            ...performance.getEntriesByType('resource').map((r) => r.name)
+                        ]
+                    };
+                    registration.installing.postMessage(data);
+                })
+                .catch((err) => console.log('SW registration FAIL:', err));
+        }
+        window.AFRAME_CDN_ROOT = "./"
+        console.log("new AFRAME CDN ROOT:", window.AFRAME_CDN_ROOT);
 
+    </script>
+
+
+    <script src="js/aframe.min.js"></script>
+    <script >
+
+    </script>
+    <script src="js/aframe-extras.min.js"></script>
+    <script src="js/aframe-event-set-component.min.js"></script>
+    <script src="js/aframe-aabb-collider-component.min.js"></script>
+    <script src="js/aframe-fps-counter-component.min.js"></script>
+    <script src="js/aframe-look-at-component.min.js"></script>
+    <script src="js/aframe-proxy-event-component.min.js"></script>
+    <script src="js/aframe-blink-controls.min.js"></script>
+    <script src="js/aframe-proxemic-component.min.js"></script>
+    <script>
+
+        AFRAME.registerComponent('enter', {
+            init: function () {
+                document.querySelector('a-scene').enterVR();
+                console.log('enter');
+            }
+        });
+
+        console.log('enter');
+    </script>
     <link rel="stylesheet" type="text/css" href="style.css" />
 
     <!-- Botões do palco  -->
@@ -109,7 +141,7 @@
         <button class="nav-button">Próxima</button>
     </div>  --->
 
-    <a-scene webcentric renderer="physicallyCorrectLights: false" cursor="rayOrigin:xrselect"
+    <a-scene enter webcentric renderer="physicallyCorrectLights: false" cursor="rayOrigin:xrselect"
         raycaster="objects: .clickable"
              xr-mode-ui="enabled: true; XRMode: xr">
         <!-- Disable inspector  
@@ -206,7 +238,7 @@
                     <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
                         gltf-model="#Heart" material="color: #4CAF50" 
-                        position="0 -0.04 -0.03" scale="0.035 0.035 0.035" text="value: <; align: center; width: 0.1"
+                        position="0 -0.04 -0.03" scale="0.035 0.035 0.035" text="value: <; align: center; width: 0.1; font: ./fonts/Roboto-msdf.json"
                         onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
                    <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
                         event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
@@ -250,11 +282,11 @@
             <a-image src="#infopanel" position="0.43 0.01822 -0.09828" height="2" width="1.3" material=""
                 geometry="height: 1.8" visible=""></a-image>
             <a-text class="title"
-                font="https://raw.githubusercontent.com/jorgecardoso/aframe-course-resources/master/fonts/montserrat-bold.fnt"
+                font="./fonts/montserrat-bold.fnt"
                 position="0.53807 0.41799 -0.02767" width="1" value="Escola do Coração" align="left" color="#00000f"
                 anchor="center" baseline="top" height="0.02" wrap-count="20" text="" visible=""></a-text>
             <a-text class="description" baseline="top" width="0.9"
-                font="https://raw.githubusercontent.com/jorgecardoso/aframe-course-resources/master/fonts/montserrat.fnt"
+                font="./fonts/montserrat.fnt"
                 position="-0.00619 0.30181 -0.01332"
                 value="Entra numa viagem emblemática experiência imersiva de Realidade Virtual no Jardim da Casa Museu Bissaya Barreto em Coimbra, Portugal. 
                 O jardim, construído nas primeiras décadas do século XX, apresenta uma série de painéis de azulejos barrocos que adaptam motivos logo-icónicos do livro de emblemas Schola Cordis, de Benedictus van Haeften.

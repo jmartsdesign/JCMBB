@@ -1,0 +1,50 @@
+{
+  "packageId": "eu.jorgecardoso.twa",
+  "applicationId": "0",
+  "host": "jorgecardoso.eu",
+  "name": "Jardim da Casa Museu Bissaya Barreto",
+  "launcherName": "JCMBB",
+  "display": "standalone",
+  "themeColor": "#FF8833",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#000000",
+  "enableNotifications": true,
+  "enableMicrophone": false,
+  "enableXRScene": true,
+  "startUrl": "/JCMBB",
+  "iconUrl": "https://jorgecardoso.eu/JCMBB/icon.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "C:\\GitRepos\\JCMBB\\android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://jorgecardoso.eu/JCMBB/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {
+    "horizonPlatformSDK": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": true,
+  "horizonOSAppMode": "immersive",
+  "fullScopeUrl": "https://jorgecardoso.eu/",
+  "minSdkVersion": 23,
+  "orientation": "default",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "appVersion": "1"
+}
