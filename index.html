@@ -12,31 +12,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js', { scope: '/JCMBB/' })
-                .then((registration) => {
-                    const data = {
-                        type: 'CACHE_URLS',
-                        payload: [
-                            location.href,
-                            ...performance.getEntriesByType('resource').map((r) => r.name)
-                        ]
-                    };
-                    registration.installing.postMessage(data);
-                })
-                .catch((err) => console.log('SW registration FAIL:', err));
-        }
-        window.AFRAME_CDN_ROOT = "./"
-        console.log("new AFRAME CDN ROOT:", window.AFRAME_CDN_ROOT);
-
-    </script>
-
 
     <script src="js/aframe.min.js"></script>
-    <script >
-
-    </script>
     <script src="js/aframe-extras.min.js"></script>
     <script src="js/aframe-event-set-component.min.js"></script>
     <script src="js/aframe-aabb-collider-component.min.js"></script>
@@ -45,6 +22,8 @@
     <script src="js/aframe-proxy-event-component.min.js"></script>
     <script src="js/aframe-blink-controls.min.js"></script>
     <script src="js/aframe-proxemic-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-laser-manipulation@0.3.0/dist/laser-manipulation.min.js"></script>
+
     <script>
 
         AFRAME.registerComponent('enter', {
@@ -141,9 +120,8 @@
         <button class="nav-button">Próxima</button>
     </div>  --->
 
-    <a-scene enter webcentric renderer="physicallyCorrectLights: false" cursor="rayOrigin:xrselect"
-        raycaster="objects: .clickable"
-             xr-mode-ui="enabled: true; XRMode: xr">
+    <a-scene webcentric renderer="physicallyCorrectLights: false" cursor="rayOrigin:xrselect"
+        raycaster="objects: .clickable" xr-mode-ui="enabled: true; XRMode: xr; enterAREnabled: true;">
         <!-- Disable inspector  
             <script>
                 var sceneEl = document.querySelector("a-scene");
@@ -155,7 +133,7 @@
         <!-- Assets ------------------------------------------------->
         <a-assets>
             <!--Elementos 3D -->
-            <a-asset-item id="JCMBB3D" src="./assets/JCMBB3D.glb"></a-asset-item>
+            <a-asset-item id="JCMBB3D" src="./assets/GLB Muro Projeto 3d Bissaya Barreto.glb"></a-asset-item>
             <a-asset-item id="PalcoEmblema" src="./assets/CenaNE--Anima-V3-C10-Final-3.glb"></a-asset-item>
             <a-asset-item id="EntradaCMBB" src="./assets/e-Entrada360.glb"></a-asset-item>
             <a-asset-item id="BaseMovimento" src="./assets/Base-Movimento.glb"></a-asset-item>
@@ -169,14 +147,14 @@
             <img id="SkyJardimCMBB" crossorigin="anonymous" src="./assets/sky.jpg" />
 
             <!--imagems dos paineis informativo -->
-            <img id="infopanel" crossorign="anonymous" src="./assets/PainelNFO.png" />
-            <img id="iPainelLegenda00" crossorign="anonymous" src="./assets/PaineisInfo/Painel00Legenda.png" />
-            <img id="iPainelLegenda01" crossorign="anonymous" src="./assets/PaineisInfo/Painel01Legenda.png" />
-            <img id="iPainelLegenda02" crossorign="anonymous" src="./assets/PaineisInfo/Painel02Legenda.png" />
-            <img id="iPainelLegenda03" crossorign="anonymous" src="./assets/PaineisInfo/Painel03Legenda.png" />
-            <img id="iPainelLegenda04" crossorign="anonymous" src="./assets/PaineisInfo/Painel04Legenda.png" />
-            <img id="iPainelLegenda05" crossorign="anonymous" src="./assets/PaineisInfo/Painel05Legenda.png" />
-            <img id="iPainelLegenda06" crossorign="anonymous" src="./assets/PaineisInfo/Painel06Legenda.png" />
+            <img id="infopanel" src="./assets/PainelNFO.png" />
+            <img id="iPainelLegenda00"  src="./assets/PaineisInfo/Painel00Legenda.png" />
+            <img id="iPainelLegenda01" src="./assets/PaineisInfo/Painel01Legenda.png" />
+            <img id="iPainelLegenda02" src="./assets/PaineisInfo/Painel02Legenda.png" />
+            <img id="iPainelLegenda03" src="./assets/PaineisInfo/Painel03Legenda.png" />
+            <img id="iPainelLegenda04" src="./assets/PaineisInfo/Painel04Legenda.png" />
+            <img id="iPainelLegenda05" src="./assets/PaineisInfo/Painel05Legenda.png" />
+            <img id="iPainelLegenda06" src="./assets/PaineisInfo/Painel06Legenda.png" />
             <img id="iPainelLegenda07" crossorign="anonymous" src="./assets/PaineisInfo/Painel07Legenda.png" />
             <img id="iPainelLegenda08" crossorign="anonymous" src="./assets/PaineisInfo/Painel08Legenda.png" />
             <img id="iPainelLegenda09" crossorign="anonymous" src="./assets/PaineisInfo/Painel09Legenda.png" />
@@ -210,41 +188,26 @@
         </a-assets>
 
         <!-- Entities ----------------------------------------------->
-
-        <!--Entrada CMBB  - https://aframe-course.glitch.me/0600-portals.html -->
-        <a-link position="-14.25 -0.6 -29.65" rotation="0 -90 0" scale="0.5 0.5" href="https://www.fbb.pt/cmbb/"
-            title="CMBB">
-        </a-link>
-
         <!-- Camera e PLAYER -------------------------------------------------------------------------------------->
-        <a-entity id="player" position="-8 0 -5" rotation="0 -40 0"
-            movement-controls="speed: 0.1; constrainToNavMesh: true"
-            sound="src: #SoundAmbi; volume: 0.65; autoplay: true; loop: true" panel-visibility-controller>
+        <a-entity id="player" position="-3 0 4" rotation="0 0 0"
+        movement-controls="controls: ml, gamepad, keyboard; speed: 0.1"
+            sound="src: #SoundAmbi_disabled; volume: 0.65; autoplay: true; loop: true" panel-visibility-controller>
             <a-entity id="camera" camera="near: 0.001" position="0 1.7 0" look-controls="pointerLockEnabled: false">
-                <a-sphere id="cabeca" radius="0.1"></a-sphere>
+                <a-sphere id="cabeca" position="0 0 0"  radius="0.05"></a-sphere>
             </a-entity>
-            <a-entity oculus-touch-controls="hand: right" blink-controls="collisionEntities:#BaseMovimento-0"> 
-                    <a-entity id="RightControlSphere" gltf-model="#seta" scale="0.2 0.2 0.2" position="-0.00499 -0.02196 -0.05457"></a-entity>
+            <a-entity id="rhand" magicleap-controls="hand: right" oculus-touch-controls="hand: right" 
+                event-set__touchpadmoved="_target: #PalcoEmblemaPortable; visible: true">
                 <!--<a-entity fps-counter position="0 0.2 0" rotation="-30 0 0"> </a-entity>-->
-            </a-entity>
-            <a-entity oculus-touch-controls="hand: left" id="LeftControl">
+
                 <!-- Mini palco -->
-                <a-entity id="PalcoEmblemaPortable" rotation="-38 0 0" gltf-model="#PalcoEmblema"
-                    scale="0.015 0.015 0.015" shadow="cast: false" position="0.01347 0.07 -0.04938"
+                <a-entity id="PalcoEmblemaPortable" rotation="0 0 0" gltf-model="#PalcoEmblema"
+                    scale="0.015 0.015 0.015" shadow="cast: false" position="0 0.05 0"
                     animation-mixer="clip: Cena0"></a-entity>
                 <!-- Botões de navegação -->
                 <a-entity id="nav-buttons" position="0.00732 0.14714 0.07596"
                     rotation="-61.35060182922316 -18.013793078913082 18.661235387410912">
-                    <a-entity id="prev-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
-                        event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
-                        gltf-model="#Heart" material="color: #4CAF50" 
-                        position="0 -0.04 -0.03" scale="0.035 0.035 0.035" text="value: <; align: center; width: 0.1; font: ./fonts/Roboto-msdf.json"
-                        onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('prev')"></a-entity>
-                   <!-- <a-entity id="next-button" class="nav-button" aabb-collider="objects: #RightControlSphere; "
-                        event-set__hitstart="material.opacity:0.5" event-set__hitend="material.opacity:1"
-                        geometry="primitive: box; width: 0.02; height: 0.02; depth: 0.01" material="color: #4CAF50"
-                        position="0.025 0 0" text="value: >; align: center; width: 0.1"
-                        onclick="document.querySelector('[scene-controller]').components['scene-controller'].changeScene('next')"></a-entity> -->
+                    <a-entity id="prev-button" class="nav-button"></a-entity>
+
                 </a-entity>
                 <!-- Legenda 3D Controlador -->
                 <a-entity id="LegendaImage3D" look-at="[camera]" position="0.01347 0.1 -0.04938" rotation="-35 0 0"
@@ -254,322 +217,276 @@
                 </a-entity>
             </a-entity>
         </a-entity>
+        <a-entity id="environment" scale="0.75 0.75 0.75" rotation="0 0 0">
+            <!-- Base de movimento Limites -->
+            <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="false"
+                nav-mesh></a-entity>
 
-        <!-- Base de movimento Limites -->
-        <a-entity id="BaseMovimento-0" gltf-model="#BaseMovimento" scale="1 1 1" visible="false" nav-mesh></a-entity>
+            <!-- Sky e Entrada do Jardim -------------------->
+            <a-entity id="SkyPrincipal" position="0 0 0" hide-on-enter-ar>
+                <a-sky src="#SkyJardimCMBB" geometry="radius: 100" hide-on-enter-ar></a-sky>
+            </a-entity>
 
-        <!-- Sky e Entrada do Jardim -------------------->
-        <a-entity id="SkyPrincipal" position="0 0 0" hide-on-enter-ar>
-            <a-sky src="#SkyJardimCMBB" geometry="radius: 100" hide-on-enter-ar></a-sky>
-        </a-entity>
+            <!-- Entrada exterior no Jardim da CMBB 360 ------------>
 
-        <!-- Entrada exterior no Jardim da CMBB 360 ------------>
-        <a-sphere cloak="#EntradaCMBBe360" radius="6" position="-14.5 2 13" geometry="phiLength: 330"
-            rotation="-11.161217849148436 -127.17027446046673 41.43573478606601">
-        </a-sphere>
-        <a-entity id="EntradaCMBBe360" gltf-model="#EntradaCMBB" scale="1 1 1" visible="true"></a-entity>
-        <a-entity id="door1" position="-11.893 1.778 9.354" rotation="0 -45 0" scale="1.383 1.819 1.019"
-            proximity-sensor="distance: 3"
-            animation__open="property: rotation; to: 0 45 0; dur: 1000; startEvents: proximityenter"
-            animation__close="property: rotation; to: 0 -45 0; dur: 1000; startEvents: proximityexit">
-            <a-plane src="#PortaoEntrada" width="1" height="2" depth="0.1" position="0.633 0 -0.062" transparent="true"
-                side="double"></a-plane>
-        </a-entity>
+            <!-- JArdim CMBB 3D -->
+            <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true"
+                shadow="cast: false"></a-entity>
 
-        <!-- Painel de entrada exterior -->
-        <a-entity class="infopanel-1" position="-16.5 1.5 12.5" look-at="[camera]" billboard="" mouse-wheel-zoom=""
-            visible="" rotation="0 0 0" scale="2.3 2.5 2.3">
-            <a-image src="#infopanel" position="0.43 0.01822 -0.09828" height="2" width="1.3" material=""
-                geometry="height: 1.8" visible=""></a-image>
-            <a-text class="title"
-                font="./fonts/montserrat-bold.fnt"
-                position="0.53807 0.41799 -0.02767" width="1" value="Escola do Coração" align="left" color="#00000f"
-                anchor="center" baseline="top" height="0.02" wrap-count="20" text="" visible=""></a-text>
-            <a-text class="description" baseline="top" width="0.9"
-                font="./fonts/montserrat.fnt"
-                position="-0.00619 0.30181 -0.01332"
-                value="Entra numa viagem emblemática experiência imersiva de Realidade Virtual no Jardim da Casa Museu Bissaya Barreto em Coimbra, Portugal. 
-                O jardim, construído nas primeiras décadas do século XX, apresenta uma série de painéis de azulejos barrocos que adaptam motivos logo-icónicos do livro de emblemas Schola Cordis, de Benedictus van Haeften.
+            <!-- Palco e Emblema 3D ---------------------------------------------------->
+            <a-entity id="PalcoEmblema_1">
+                <a-box width="6" height="6" depth="6" position="-6.586 1.2 -15.314" color="red"
+                    aabb-collider="objects: #cabeca; debug: false" visible="false"
+                    event-set__enter="_event: hitstart; _target: #player; _emit: hitstart"
+                    event-set__exit="_event: hitend; _target: #player; _emit: hitend"></a-box>
+                <a-entity id="PalcoEmblema3D" rotation="0 0 0" gltf-model="#PalcoEmblema" scale="0.2 0.2 0.2"
+                    shadow="cast: false" position="-6.586 1.2 -15.314"
+                    disable_animation="property: rotation; to: 0 360 0; dur: 9500; loop: true"
+                    animation-mixer="clip: Cena0">
+                </a-entity>
+            </a-entity>
 
-                Aaplicação explora o conceito de emblemática aplicada através da criação de uma experiência imersiva de realidade virtual e realidade aumentada (RV/RA)"
-                align="left" color="black" text="">
-            </a-text>
-        </a-entity>
+            <!-- Adiciona o elementos áudio à cena -->
+            <a-entity id="AudiosPaineis" position="-6.586 1.2 -15.314">
+                <a-entity id="sound0"
+                    sound="src: #SoundP0; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound1"
+                    sound="src: #SoundP1; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound2"
+                    sound="src: #SoundP2; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound3"
+                    sound="src: #SoundP3; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound4"
+                    sound="src: #SoundP4; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound5"
+                    sound="src: #SoundP5; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound6"
+                    sound="src: #SoundP6; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound7"
+                    sound="src: #SoundP7; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound8"
+                    sound="src: #SoundP8; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound9"
+                    sound="src: #SoundP9; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+                <a-entity id="sound10"
+                    sound="src: #SoundP10; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
+            </a-entity>
 
-        <!-- JArdim CMBB 3D -->
-        <a-entity id="JardimCMBB" gltf-model="#JCMBB3D" scale="1 1 1" visible="true" shadow="cast: false"></a-entity>
 
-        <!-- Palco e Emblema 3D ---------------------------------------------------->
-        <a-entity id="PalcoEmblema_1">
-            <a-box width="6" height="6" depth="6" position="-6.586 1.2 -15.314" color="red"
-                aabb-collider="objects: #cabeca; debug: false" visible="false"
-                event-set__enter="_event: hitstart; _target: #player; _emit: hitstart"
-                event-set__exit="_event: hitend; _target: #player; _emit: hitend"></a-box>
-            <a-entity id="PalcoEmblema3D" rotation="0 0 0" gltf-model="#PalcoEmblema" scale="0.2 0.2 0.2"
-                shadow="cast: false" position="-6.586 1.2 -15.314"
-                animation="property: rotation; to: 0 360 0; dur: 9500; loop: true" animation-mixer="clip: Cena0">
-            </a-entity>
-        </a-entity>
+            <!-- JardimCMBB PAINEIS -------------------------------->
 
-        <!-- Adiciona o elementos áudio à cena -->
-        <a-entity id="AudiosPaineis" position="-6.586 1.2 -15.314">
-            <a-entity id="sound0"
-                sound="src: #SoundP0; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound1"
-                sound="src: #SoundP1; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound2"
-                sound="src: #SoundP2; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound3"
-                sound="src: #SoundP3; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound4"
-                sound="src: #SoundP4; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound5"
-                sound="src: #SoundP5; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound6"
-                sound="src: #SoundP6; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound7"
-                sound="src: #SoundP7; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound8"
-                sound="src: #SoundP8; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound9"
-                sound="src: #SoundP9; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-            <a-entity id="sound10"
-                sound="src: #SoundP10; volume: 1; refDistance: 45; rolloffFactor: 0.5; autoplay: false"></a-entity>
-        </a-entity>
-
-        <!-- JardimCMBB PAINEIS -------------------------------->
-
-        <!-- Painel 01 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 1.75" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-1; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-1; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda01; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda01; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel1"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPainel"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel1"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable1"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable1">
-            </a-box>
-            <!-- Mostra o Painel Azulejo -->
-            <a-entity id="CordisPanel-1" class="infopanel" position="-13.6 1.4 1.75" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
+            <!-- Painel 01 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 2 1.75" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda01; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda01; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel1"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPainel"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel1"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable1"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable1">
+                </a-box>
+                <!-- Mostra o Painel Azulejo -->
+                <a-entity id="CordisPanel-1" class="infopanel" position="-13.6 1.4 1.75"
+                    rotation="0 90 0">
+                    <a-image src="#PainelCordis-1" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda01" class="infopanel" position="-13 0.5 1.75" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda01" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-            <a-entity id="PainelLegenda01" class="infopanel" position="-13 0.5 1.75" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda01" height="0.7" width="1"></a-image>
+            <!-- Painel 02 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 2 -0.35" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false" 
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda02; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda02; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel2"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPainel"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel2"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable2"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable2">
+                </a-box>
+                <!-- Mostra o Painel Azulejo -->
+                <a-entity id="CordisPanel-2" class="infopanel" position="-13.6 1.4 -0.35" rotation="0 90 0">
+                    <a-image src="#PainelCordis-2" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda02" class="infopanel" position="-13 0.5 -0.35" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda02" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-        </a-entity>
-        <!-- Painel 02 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -0.35" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-2; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-2; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda02; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda02; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel2"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine2"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel2"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable2"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable2">
-            </a-box>
-            <!-- Mostra o Painel Azulejo -->
-            <a-entity id="CordisPanel-2" class="infopanel" position="-13.6 1.4 -0.35" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-2" height="2" width="2"></a-image>
+            <!-- Painel 03 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -2.4" color="red" 
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda03; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda03; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel3"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPainel"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel3"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable3"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable3">
+                </a-box>
+                <a-entity id="CordisPanel-3" class="infopanel" position="-13.6 1.4 -2.4" rotation="0 90 0">
+                    <a-image src="#PainelCordis-3" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda03" class="infopanel" position="-13 0.5 -2.4" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda03" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-            <a-entity id="PainelLegenda02" class="infopanel" position="-13 0.5 -0.35" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda02" height="0.7" width="1"></a-image>
+            <!-- Painel 04 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -4.4" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda04; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda04; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel4"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine4"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel4"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable4"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable4">
+                </a-box>
+                <a-entity id="CordisPanel-4" class="infopanel" position="-13.6 1.4 -4.4" rotation="0 90 0">
+                    <a-image src="#PainelCordis-4" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda04" class="infopanel" position="-13 0.5 -4.4" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda04" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-        </a-entity>
-        <!-- Painel 03 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -2.4" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-3; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-3; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda03; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda03; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel3"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPainel"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel3"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable3"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable3">
-            </a-box>
-            <a-entity id="CordisPanel-3" class="infopanel" position="-13.6 1.4 -2.4" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-3" height="2" width="2"></a-image>
+            <!-- Painel 05 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -6.4" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda05; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda05; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel5"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine5"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel5"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable5"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable5">
+                </a-box>
+                <a-entity id="CordisPanel-5" class="infopanel" position="-13.6 1.4 -6.4" rotation="0 90 0">
+                    <a-image src="#PainelCordis-5" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda05" class="infopanel" position="-13 0.5 -6.4" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda05" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-            <a-entity id="PainelLegenda03" class="infopanel" position="-13 0.5 -2.4" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda03" height="0.7" width="1"></a-image>
+            <!-- Painel 06 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -11.7" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda06; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda06; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel6"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine6"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel6"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable6"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable6">
+                </a-box>
+                <a-entity id="CordisPanel-6" class="infopanel" position="-13.6 1.4 -11.7" rotation="0 90 0">
+                    <a-image src="#PainelCordis-6" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda06" class="infopanel" position="-13 0.5 -11.7" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda06" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-        </a-entity>
-        <!-- Painel 04 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -4.4" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-4; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-4; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda04; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda04; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel4"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine4"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel4"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable4"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable4">
-            </a-box>
-            <a-entity id="CordisPanel-4" class="infopanel" position="-13.6 1.4 -4.4" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-4" height="2" width="2"></a-image>
+            <!-- Painel 07 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -13.7" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda07; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda07; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel7"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine7"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel7"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable7"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable7">
+                </a-box>
+                <a-entity id="CordisPanel-7" class="infopanel" position="-13.6 1.4 -13.7" rotation="0 90 0">
+                    <a-image src="#PainelCordis-7" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda07" class="infopanel" position="-13 0.5 -13.7" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda07" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-            <a-entity id="PainelLegenda04" class="infopanel" position="-13 0.5 -4.4" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda04" height="0.7" width="1"></a-image>
+            <!-- Painel 08 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -15.7" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda08; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda08; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel8"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine8"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel8"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable8"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable8">
+                </a-box>
+                <a-entity id="CordisPanel-8" class="infopanel" position="-13.6 1.4 -15.7" rotation="0 90 0">
+                    <a-image src="#PainelCordis-8" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda08" class="infopanel" position="-13 0.5 -15.7" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda08" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-        </a-entity>
-        <!-- Painel 05 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -6.4" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-5; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-5; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda05; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda05; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel5"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine5"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel5"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable5"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable5">
-            </a-box>
-            <a-entity id="CordisPanel-5" class="infopanel" position="-13.6 1.4 -6.4" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-5" height="2" width="2"></a-image>
+            <!-- Painel 09 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1.5" position="-12 1.4 -17.7" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda09; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda09; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel9"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine9"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel9"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable9"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable9">
+                </a-box>
+                <a-entity id="CordisPanel-9" class="infopanel" position="-13.6 1.4 -17.7" rotation="0 90 0">
+                    <a-image src="#PainelCordis-9" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda09" class="infopanel" position="-13 0.5 -17.7" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda09" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
-            <a-entity id="PainelLegenda05" class="infopanel" position="-13 0.5 -6.4" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda05" height="0.7" width="1"></a-image>
-            </a-entity>
-        </a-entity>
-        <!-- Painel 06 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -11.7" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-6; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-6; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda06; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda06; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel6"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine6"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel6"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable6"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable6">
-            </a-box>
-            <a-entity id="CordisPanel-6" class="infopanel" position="-13.6 1.4 -11.7" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-6" height="2" width="2"></a-image>
-            </a-entity>
-            <a-entity id="PainelLegenda06" class="infopanel" position="-13 0.5 -11.7" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda06" height="0.7" width="1"></a-image>
-            </a-entity>
-        </a-entity>
-        <!-- Painel 07 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -13.7" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-7; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-7; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda07; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda07; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel7"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine7"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel7"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable7"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable7">
-            </a-box>
-            <a-entity id="CordisPanel-7" class="infopanel" position="-13.6 1.4 -13.7" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-7" height="2" width="2"></a-image>
-            </a-entity>
-            <a-entity id="PainelLegenda07" class="infopanel" position="-13 0.5 -13.7" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda07" height="0.7" width="1"></a-image>
-            </a-entity>
-        </a-entity>
-        <!-- Painel 08 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -15.7" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-8; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-8; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda08; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda08; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel8"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine8"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel8"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable8"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable8">
-            </a-box>
-            <a-entity id="CordisPanel-8" class="infopanel" position="-13.6 1.4 -15.7" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-8" height="2" width="2"></a-image>
-            </a-entity>
-            <a-entity id="PainelLegenda08" class="infopanel" position="-13 0.5 -15.7" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda08" height="0.7" width="1"></a-image>
-            </a-entity>
-        </a-entity>
-        <!-- Painel 09 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -17.7" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-9; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-9; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda09; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda09; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel9"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine9"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel9"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable9"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable9">
-            </a-box>
-            <a-entity id="CordisPanel-9" class="infopanel" position="-13.6 1.4 -17.7" visible="false" rotation="0 90 0">
-                <a-image src="#PainelCordis-9" height="2" width="2"></a-image>
-            </a-entity>
-            <a-entity id="PainelLegenda09" class="infopanel" position="-13 0.5 -17.7" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda09" height="0.7" width="1"></a-image>
-            </a-entity>
-        </a-entity>
-        <!-- Painel 10 -->
-        <a-entity id="SceneController">
-            <a-box width="2" height="2" depth="1.5" position="-12 1.4 -19.7" color="red"
-                aabb-collider="objects: #cabeca; " visible="false"
-                event-set__coliliderstart="_event: hitstart; _target:#CordisPanel-10; visible:true"
-                event-set__coliliderend="_event: hitend; _target:#CordisPanel-10; visible:false"
-                event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda10; visible:true"
-                event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda10; visible:false"
-                proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel10"
-                proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine10"
-                proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel10"
-                proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
-                proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable10"
-                proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable10">
-            </a-box>
-            <a-entity id="CordisPanel-10" class="infopanel" position="-13.6 1.4 -19.5" visible="false"
-                rotation="0 90 0">
-                <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
-            </a-entity>
-            <a-entity id="PainelLegenda10" class="infopanel" position="-13 0.5 -19.5" look-at="[camera]" visible="false"
-                rotation="0 90 0">
-                <a-image src="#iPainelLegenda10" height="0.7" width="1"></a-image>
+            <!-- Painel 10 -->
+            <a-entity id="SceneController">
+                <a-box width="2" height="2" depth="1" position="-12 1.4 -19.7" color="red"
+                    aabb-collider="objects: #cabeca; " visible="false"
+                    event-set__coliliderstartLegenda="_event: hitstart; _target:#PainelLegenda10; visible:true"
+                    event-set__coliliderendLegenda="_event: hitend; _target:#PainelLegenda10; visible:false"
+                    proxy-event="event: hitstart; to: #PalcoEmblema3D; as: hitPainel10"
+                    proxy-event__exit="event: hitend; to: #PalcoEmblema3D; as: exitPaine10"
+                    proxy-event__portablestart="event: hitstart; to: #PalcoEmblemaPortable; as: hitPainel10"
+                    proxy-event__portableexit="event: hitend; to: #PalcoEmblemaPortable; as: exitPainel"
+                    proxy-event__player="event: hitstart; to: #player; as: hitPainelPortable10"
+                    proxy-event__playerexit="event: hitend; to: #player; as: exitPainelPortable10">
+                </a-box>
+                <a-entity id="CordisPanel-10" class="infopanel" position="-13.6 1.4 -19.5" rotation="0 90 0">
+                    <a-image src="#PainelCordis-10" height="2" width="2"></a-image>
+                </a-entity>
+                <a-entity id="PainelLegenda10" class="infopanel" position="-13 0.5 -19.5" look-at="[camera]"
+                    visible="false" rotation="0 90 0">
+                    <a-image src="#iPainelLegenda10" height="0.7" width="1"></a-image>
+                </a-entity>
             </a-entity>
         </a-entity>
     </a-scene>
@@ -578,6 +495,96 @@
 
     <!-- Função Contrala animação dos emblemas Retornando á Cen0 e atribui o audio e legendas--->
     <script>
+        AFRAME.registerComponent('ml-controls', {
+            init: function () {
+                this._touchpaddown = false;
+                this.el.addEventListener('touchpaddown', function (evt) {
+                    this._touchpaddown = true;
+                }.bind(this));
+                this.el.addEventListener('touchpadup', function (evt) {
+                    this._touchpaddown = false;
+                }.bind(this));
+                this.el.addEventListener('touchpadmoved', function (evt) {
+                    this._x = evt.detail.x;
+                    this._y = evt.detail.y;
+                }.bind(this));
+            },
+
+            isVelocityActive: function () {
+                return this._touchpaddown;
+            },
+            getPositionDelta: function () {
+                return new THREE.Vector3(this._x*0.05, 0, this._y*0.05);
+            }
+        });
+/*
+        AFRAME.registerComponent('listentouch', {
+            init: function () {
+                this._environment = document.querySelector('#environment');
+                this._triggerdown = false;
+                this.el.addEventListener('triggerdown', function (evt) {
+                    this._triggerdown = true;
+                }.bind(this));
+                this.el.addEventListener('triggerup', function (evt) {
+                    this._triggerdown = false;
+                }.bind(this));
+                this.el.addEventListener('touchpadmoved', function (evt) {
+                    if (this._triggerdown) {
+                        let currentRot = this._environment.getAttribute('rotation');
+                        if (evt.detail.x > 0.5) {
+                            // Rotate the environment when the touchpad is pressed
+                            this._environment.setAttribute('rotation', {
+                                x: currentRot.x,
+                                y: currentRot.y - 5,
+                                z: currentRot.z
+                            });
+                        } else if (evt.detail.x < -0.5) {
+                            // Rotate the environment in the opposite direction
+                            this._environment.setAttribute('rotation', {
+                                x: currentRot.x,
+                                y: currentRot.y + 5,
+                                z: currentRot.z
+                            });
+                        }
+                    } else {
+                        let currentPos = this._environment.getAttribute('position');
+                        if (evt.detail.y > 0.5) {
+                            // Move the entity up when the touchpad is pressed
+                            this._environment.setAttribute('position', {
+                                x: currentPos.x,
+                                y: currentPos.y,
+                                z: currentPos.z + 0.1
+                            });
+                        } else if (evt.detail.y < -0.5) {
+                            // Move the entity down when the touchpad is pressed
+                            this._environment.setAttribute('position', {
+                                x: currentPos.x,
+                                y: currentPos.y,
+                                z: currentPos.z - 0.1
+                            });
+                        } else if (evt.detail.x > 0.5) {
+                            // Move the entity up when the touchpad is pressed
+                            this._environment.setAttribute('position', {
+                                x: currentPos.x + 0.1,
+                                y: currentPos.y,
+                                z: currentPos.z
+                            });
+                        } else if (evt.detail.x < -0.5) {
+                            // Move the entity down when the touchpad is pressed
+                            this._environment.setAttribute('position', {
+                                x: currentPos.x - 0.1,
+                                y: currentPos.y,
+                                z: currentPos.z
+                            });
+                        }
+                    }
+                }.bind(this));
+
+
+            }
+        });
+
+*/
         AFRAME.registerComponent('scene-controller', {
             init: function () {
                 var el = this.el;
@@ -667,7 +674,6 @@
                     nextButton.addEventListener('click', () => this.changeScene('next'));
                 }
 
-
                 // para intersecçao com o controlador
                 if (prevButton && nextButton) {
                     prevButton.addEventListener('hitstart', () => this.changeScene('prev'));
@@ -756,49 +762,6 @@
         });
     </script>
 
-    <!-- Função torna invisivel a esfera 360 exteriormente da entrada ---------------------------------------------->
-    <script>
-        AFRAME.registerComponent("cloak", {
-            schema: { type: "selectorAll" },
-            setRenderOrder: function (el, order) {
-                let mesh = el.getObject3D("mesh");
-                let _this = this;
-                if (!mesh) {
-                    el.addEventListener("model-loaded", function () {
-                        _this.setRenderOrder(el, order);
-                    });
-                    return;
-                }
-                console.log("setting render order on ", el, "to ", order);
-                mesh.renderOrder = order;
-            },
-            init: function () {
-                console.log("Setting cloak");
-                let cloak = this.el;
-
-                console.log("Cloak loaded");
-                let mesh = cloak.getObject3D("mesh"); // grab the mesh
-                if (mesh === undefined) {
-                    console.log("no mesh");
-                    return;
-                } // return if no mesh :(
-                mesh.traverse(function (node) {
-                    // traverse through and apply settings
-                    if (node.isMesh && node.material) {
-                        // make sure the element can be a cloak
-                        console.log(node);
-                        node.material.colorWrite = false;
-                        node.material.needsUpdate = true;
-                    }
-                });
-                mesh.renderOrder = 1;
-                console.log(cloak.children);
-                for (const child of this.data) {
-                    this.setRenderOrder(child, 11);
-                }
-            }
-        });
-    </script>
 
     <!-- Função para esconder o loaded quando estiver a pagina estiver pronta para exebir -->
     <script>
